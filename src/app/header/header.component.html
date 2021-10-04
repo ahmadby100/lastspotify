@@ -1,0 +1,37 @@
+<section class="fixed w-full px-8 text-gray-700 bg-gray-100 body-font z-50 shadow-md">
+    <div class="container flex flex-col flex-nowrap items-center justify-between py-5 mx-auto md:flex-row max-w-7xl">
+        <a class="relative z-10 flex items-center w-auto text-2xl font-extrabold leading-none text-black select-none" [innerHTML]="header_title"></a>
+
+        <nav class="top-0 left-0 z-0 flex items-center justify-center w-full h-full py-5 -ml-10 space-x-5 text-base md:-ml-5 md:py-0 absolute">
+            <a onclick="changePeriod('week', this)" class="cursor-pointer period-tabs relative font-bold leading-6 text-gray-600 transition duration-150 ease-out hover:text-gray-900" x-data="{ hover: false }">
+                <span class="block">Week</span>
+                <span class="absolute bottom-0 left-0 inline-block w-full h-0.5 -mb-1 overflow-hidden">
+                    <span x-show="hover" class="absolute inset-0 inline-block w-full h-1 h-full transform bg-gray-900" style="display: none;"></span>
+                </span>
+            </a>
+            <a onclick="changePeriod('month', this)" class="cursor-pointer period-tabs relative font-medium leading-6 text-gray-600 transition duration-150 ease-out hover:text-gray-900" x-data="{ hover: false }">
+                <span class="block">Month</span>
+                <span class="absolute bottom-0 left-0 inline-block w-full h-0.5 -mb-1 overflow-hidden">
+                    <span x-show="hover" class="absolute inset-0 inline-block w-full h-1 h-full transform bg-gray-900" style="display: none;"></span>
+                </span>
+            </a>
+            <a onclick="changePeriod('year', this)" class="cursor-pointer period-tabs relative font-medium leading-6 text-gray-600 transition duration-150 ease-out hover:text-gray-900" x-data="{ hover: false }">
+                <span class="block">Year</span>
+                <span class="absolute bottom-0 left-0 inline-block w-full h-0.5 -mb-1 overflow-hidden">
+                    <span x-show="hover" class="absolute inset-0 inline-block w-full h-1 h-full transform bg-gray-900" style="display: none;"></span>
+                </span>
+            </a>
+            <a onclick="changePeriod('all', this)" class="cursor-pointer period-tabs relative font-medium active:font-bold leading-6 text-gray-600 transition duration-150 ease-out hover:text-gray-900" x-data="{ hover: false }">
+                <span class="block">All Time</span>
+                <span class="absolute bottom-0 left-0 inline-block w-full h-0.5 -mb-1 overflow-hidden">
+                    <span x-show="hover" class="absolute inset-0 inline-block w-full h-full transform bg-gray-900" style="display: none;"></span>
+                </span>
+            </a>
+        </nav>
+        <h1 class="text-lg font-bold leading-tight text-center z-50">
+          <a onclick="prev_btn();"><i class="fa fa-chevron-left mr-3 text-gray-500 cursor-pointer" id="prev_period"></i></a>
+          Your Music From <span id="time_period"></span> 
+          <a onclick="next_btn();"><i class="fa fa-chevron-right ml-3 text-gray-300" id="next_period"></i></a>
+      </h1>
+    </div>
+  </section>
