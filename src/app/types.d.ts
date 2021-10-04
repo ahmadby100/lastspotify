@@ -32,3 +32,55 @@ export interface DBResponse {
     },
     results: DB_result[] 
 }
+
+export interface chartData {
+    label: string,
+    backgroundColor: string,
+    borderColor: string,
+    data: chartInnerData,
+    stepped: boolean
+}
+
+export interface chartInnerData {
+    Mon: number,
+    Tue: number,
+    Wed: number,
+    Thur: number,
+    Fri: number,
+    Sat: number,
+    Sun: number
+}
+
+export interface chartConfig {
+    type: string,
+    data: chartInnerData,
+    options: {
+        animation?: {
+            onComplete?: Function,
+            delay?: Function,
+
+        },
+        elements?: {
+            line?: {
+                tension?: number
+            }
+        },
+        legend?: {
+            display?: boolean
+        },
+        responsive?: boolean,
+        plugins?: {
+            title?: {
+                display?: boolean,
+                text?: string[]
+            },
+            scales?: {
+                y?: {
+                    type?: string,
+                    display?: boolean,
+                    position?: string
+                }
+            }
+        }
+    }
+}

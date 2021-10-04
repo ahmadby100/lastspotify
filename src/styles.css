@@ -379,10 +379,6 @@ textarea::-ms-input-placeholder {
   font-size: 1.875rem;
   line-height: 2.25rem;
 }
-.text-sm {
-  font-size: 0.875rem;
-  line-height: 1.25rem;
-}
 .leading-none {
   line-height: 1;
 }
@@ -502,10 +498,6 @@ textarea::-ms-input-placeholder {
 .text-green-600 {
   --tw-text-opacity: 1;
   color: rgba(5, 150, 105, var(--tw-text-opacity));
-}
-.text-gray-400 {
-  --tw-text-opacity: 1;
-  color: rgba(156, 163, 175, var(--tw-text-opacity));
 }
 .select-none {
   -webkit-user-select: none;
