@@ -9,7 +9,7 @@
       <h1 class="text-lg text-gray-500 text-center">You listened the most on <span id="most_listens"></span></h1>
       <br>
       <div class="box-border flex flex-col items-center content-center px-8 mx-auto mt-2 leading-6 text-black border-0 border-gray-300 border-solid md:mt-20 xl:mt-0 md:flex-row max-w-7xl lg:px-16">
-          <canvas id="chart-1" class="flex-1"></canvas>        
+          <app-bar-chart [attr.period]="period" [attr.curr]="curr_period" [attr.prev]="prev_period"></app-bar-chart>    
         </div>
     <!-- End  Content -->
   </section>

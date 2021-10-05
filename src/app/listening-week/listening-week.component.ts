@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import * as $ from 'jquery';
-import {Chart} from 'chart.js/auto';
 import { gOffset, ROOT_URL, getDate } from "../global";
 
 import { DBResponse, chartData, chartInnerData, chartConfig } from "../types"
-import { ChartConfiguration } from 'chart.js';
+
 
 @Component({
 	selector: 'app-listening-week',
@@ -13,7 +12,11 @@ import { ChartConfiguration } from 'chart.js';
 })
 export class ListeningWeekComponent implements OnInit {
 
+	period = "week";
+
 	title = 'Listening Week';
+	curr_period = {};
+	prev_period = {};
 
 	daily_plays = (offset: number, period: string): void => {
 		let daily_scrobbles: any = { mon: 0, tue: 0, wed: 0, thr: 0, fri: 0, sat: 0, sun: 0 };
@@ -85,6 +88,7 @@ export class ListeningWeekComponent implements OnInit {
 				}
 				$("#most_listens").html(`${most_days}s`);
 				$("#week_scrobbles").html(resp.results.length.toString());
+				this.curr_period = daily_scrobbles;
 				if (period == "all") {
 					// initChart(daily_scrobbles, null);
 
@@ -119,24 +123,8 @@ export class ListeningWeekComponent implements OnInit {
 									default:
 										break;
 								}
-								let prev_period_data = {
-									label: `Previous ${period}`,
-									backgroundColor: "rgba(96, 165, 250, 0.5)",
-									borderColor: "rgba(96, 165, 250, 0.5)",
-									data: {
-										Mon: week_daily_scrobbles.mon,
-										Tue: week_daily_scrobbles.tue,
-										Wed: week_daily_scrobbles.wed,
-										Thur: week_daily_scrobbles.thr,
-										Fri: week_daily_scrobbles.fri,
-										Sat: week_daily_scrobbles.sat,
-										Sun: week_daily_scrobbles.sun,
-										
-									},
-									stepped: true
-								};
-								$("#prev_week_scrobbles").html(`${resp2.results.length} Scrobbles`);
-								// initChart(daily_scrobbles, prev_period_data);
+								// initChart(daily_scrobbles, week_daily_scrobbles);
+								this.prev_period = week_daily_scrobbles;
 							}
 						}
 					})
@@ -147,72 +135,7 @@ export class ListeningWeekComponent implements OnInit {
 
 	};
 
-	initChart = (data: chartInnerData, prev_period_data: chartData, period: number) => {
-		let chart_listening = {
-			datasets: [
-				{
-					label: `Current ${period}`,
-					backgroundColor: "rgba(96, 165, 250)",
-					borderColor: "rgba(96, 165, 250)",
-					data: {
-						Mon: data.Mon,
-						Tue: data.Tue,
-						Wed: data.Wed,
-						Thur: data.Thur,
-						Fri: data.Fri,
-						Sat: data.Sat,
-						Sun: data.Sun
-					},
-					stepped: true
-				}
-
-			]
-		}
-		if (prev_period_data)
-			chart_listening.datasets.push(prev_period_data);
-		else
-			chart_listening.datasets[0].label = "All Time";
-		let delayed;
-		const chart_listening_config: ChartConfiguration = {
-			type: "bar",
-			data: chart_listening,
-			options: {
-				animation: {
-					onComplete: () => {
-						delayed = true;
-					},
-					delay: (context: any) => {
-						let delay = 0;
-						if (context.type === "data" && context.mode) {
-							delay = context.dataIndex * 1000 + context.datasetIndex * 100;
-						}
-						return delay;
-					}
-				},
-				elements: {
-					line: {
-						tension: 0.4
-					}
-				},
-				responsive: true,
-				plugins: {
-					title: {
-						display: false,
-						text: ['Listening Week [Scrobbles]']
-					},
-					scales: {
-						y: {
-							type: "linear",
-							display: false,
-							position: "left"
-						}
-					}
-				}
-			}
-		};
-		const chart_listening_var = new Chart(document.getElementById("chart-1"), chart_listening_config)
-	};
-	d = this.daily_plays(1, "week");
+	d = this.daily_plays(1, this.period);
 
 	constructor() { }
 
