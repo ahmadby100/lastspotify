@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ChartDataset, ChartOptions, ChartType } from 'chart.js';
+import { DailyPlaysService } from '../daily-plays.service'
 
 @Component({
   selector: 'app-bar-chart',
@@ -7,10 +8,11 @@ import { ChartDataset, ChartOptions, ChartType } from 'chart.js';
   styleUrls: ['./bar-chart.component.css']
 })
 export class BarChartComponent implements OnInit {
-  @Input() curr_period: any;
-  @Input() prev_period: any;
-  @Input() period: string | undefined;
-
+  curr_period: Object = {};
+  prev_period: Object = {};
+  period: string = "week";
+  offset: number = 1;
+  
   delayed = false;
   chartOptions: ChartOptions = {
     responsive: true,
@@ -34,7 +36,7 @@ export class BarChartComponent implements OnInit {
         y: {
           type: "linear",
           display: false,
-          position: "left"
+          position: "right"
         }
       }
     }
@@ -42,17 +44,53 @@ export class BarChartComponent implements OnInit {
   chartLabels: string[] = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
   chartType: ChartType = "bar";
   chartLegend = false;
-  
-  chartData: ChartDataset[] = []
 
-  constructor() { }
+  getChartData = (): {curr: Object, prev: Object} => {
+    return this.dailyPlays.daily_plays(this.offset, this.period);
+  } 
+  
+  chartData: {data: Object, label: string}[] = [];
+
+  constructor(private dailyPlays: DailyPlaysService) { }
+
+
 
   ngOnInit(): void {
+    let ret = this.getChartData()
+    this.curr_period = ret.curr;
+    this.prev_period = ret.prev;
+  
+    // this.chartData = [
+    //   {data: this.curr_period, label: `Current ${this.period}`},
+    //   {data: this.prev_period, label: `Previous ${this.period}`}
+    // ];
     this.chartData = [
-      {data: this.curr_period, label: `Current ${this.period}`},
-      {data: this.prev_period, label: `Previous ${this.period}`},
-      
-    ]
+      {
+          "data": {
+              "Monday": 116,
+              "Tuesday": 63,
+              "Wednesday": 36,
+              "Thursday": 0,
+              "Friday": 23,
+              "Saturday": 33,
+              "Sunday": 60
+          },
+          "label": "Current week"
+      },
+      {
+          "data": {
+              "Monday": 79,
+              "Tuesday": 37,
+              "Wednesday": 78,
+              "Thursday": 116,
+              "Friday": 35,
+              "Saturday": 60,
+              "Sunday": 56
+          },
+          "label": "Previous week"
+      }
+  ]
+    console.log(this.chartData);
   }
 
 }
