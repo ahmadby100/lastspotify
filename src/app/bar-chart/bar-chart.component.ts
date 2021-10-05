@@ -15,7 +15,7 @@ import { DailyPlaysService } from '../daily-plays.service'
 })
 export class BarChartComponent implements OnInit {
   curr_period: Object = {};
-  prev_period: Object = {};
+  prev_period: Object | null | undefined;
   period: string = "week";
   offset: number = 1;
   datastate: boolean = false;
@@ -51,42 +51,39 @@ export class BarChartComponent implements OnInit {
   chartLabels: string[] = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
   chartType: ChartType = "bar";
   chartLegend = false;
+  chartData: Array<{data: Object, label: string}> = [];
 
-  getChartData = async():  /* { curr: Object; prev: Object; state: boolean} */ Promise<void> => {
-    // let daily_scrobbles: any = { Monday: 0, Tuesday: 0, Wednesday: 0, Thursday: 0, Friday: 0, Saturday: 0, Sunday: 0 };
-		// let week_daily_scrobbles: any = { Monday: 0, Tuesday: 0, Wednesday: 0, Thursday: 0, Friday: 0, Saturday: 0, Sunday: 0 };
-		// for (let i in daily_scrobbles) daily_scrobbles[i] = 0;
-		// for (let j in week_daily_scrobbles) week_daily_scrobbles[j] = 0;
-
-		// if (gOffset == 1)
-		// 	$("#next_period").removeClass("text-gray-500 cursor-pointer").addClass("text-grey-300");
-		// else
-		// 	$("#next_period").addClass("text-gray-500 cursor-pointer").removeClass("text-gray-300");
-
-    
+  getChartData = ():  /* { curr: Object; prev: Object; state: boolean} */ void => {  
 
     
     // return this.dailyPlays.daily_plays(this.offset, this.period, this.datastate);
     this.dailyPlays.daily_plays(this.offset, this.period)
-      .subscribe((obj: daily_plays) => {
-        this.curr_period = obj.curr;
-        this.prev_period = obj.prev;
-        let newData = [
-          {"data": this.curr_period, "label": `Current ${this.period}`},
-          {"data": this.prev_period, "label": `Previous ${this.period}`}
-        ];
-        let clone = JSON.parse(JSON.stringify(this.chartData));
-        clone = newData;
-        this.chartData = clone;
+      .subscribe((obj: daily_plays): void => {
+          this.curr_period = obj.curr;
+          this.prev_period = obj.prev;
+          let newData = [
+            {"data": this.curr_period, "label": `Current ${this.period}`},
+            {"data": this.prev_period, "label": `Previous ${this.period}`}
+          ];
+        
+        // let clone = JSON.parse(JSON.stringify(this.chartData));
+        // clone = newData;
+        this.chartData = newData; // clone;
         console.log(this.chartData);
         
+        while (this.datastate) {
+          
+          if (!$.isEmptyObject(this.chartData[0]) && !$.isEmptyObject(this.chartData[1]))
+            this.datastate = true;
+        }
+        
+        setTimeout(() => {
+          this.datastate = true;
+        }, 3500) 
       });
-      setTimeout(() => {
-        this.datastate = true;
-      }, 4000) 
   } 
   
-  chartData: {data: Object, label: string}[] = [];
+  
   
 
   constructor(private dailyPlays: DailyPlaysService) {

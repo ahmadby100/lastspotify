@@ -12,11 +12,11 @@ import { Observable, of } from 'rxjs';
 })
 
 export class DailyPlaysService {
-  
+
   constructor(private http: HttpClient) { }
-	daily_plays = (offset: number, period: string): Observable<{curr: Object, prev: Object}> /* (period: string, offset: number): Observable<DBResponse> */ => {
-		
-		// return this.http.get<DBResponse>(`${ROOT_URL}/tracksplayed/${period}/${offset}`)
+	daily_plays = (offset: number, period: string): Observable<{curr: Object, prev: Object }> /* (period: string, offset: number): Observable<DBResponse> */ => {
+
+
 		let daily_scrobbles: any = { Monday: 0, Tuesday: 0, Wednesday: 0, Thursday: 0, Friday: 0, Saturday: 0, Sunday: 0 };
 		let week_daily_scrobbles: any = { Monday: 0, Tuesday: 0, Wednesday: 0, Thursday: 0, Friday: 0, Saturday: 0, Sunday: 0 };
 		for (let i in daily_scrobbles) daily_scrobbles[i] = 0;
@@ -26,10 +26,6 @@ export class DailyPlaysService {
 			$("#next_period").removeClass("text-gray-500 cursor-pointer").addClass("text-grey-300");
 		else
 			$("#next_period").addClass("text-gray-500 cursor-pointer").removeClass("text-gray-300");
-
-    
-
-
 
 		$.ajax({
 			url: `${ROOT_URL}/tracksplayed/${period}/${offset}`,
@@ -90,12 +86,8 @@ export class DailyPlaysService {
 				}
 				$("#most_listens").html(`${most_days}${(period == "week") ? " " : "s"} `);
 				$("#week_scrobbles").html(resp.results.length.toString());
-				
-				// Object.assign(this.curr_period, daily_scrobbles);
-				if (period == "all") {
-					// initChart(daily_scrobbles, null);
 
-				} else {
+				if (period != "all") {
 					$.ajax({
 						url: `${ROOT_URL}/tracksplayed/${period}/${offset + 1}`,
 						crossDomain: true,
@@ -126,7 +118,6 @@ export class DailyPlaysService {
 									default:
 										break;
 								}
-								// initChart(daily_scrobbles, week_daily_scrobbles);
 							}
 						}
 					})
@@ -134,10 +125,9 @@ export class DailyPlaysService {
 
 			}
 		});
-
     return of({
       curr: daily_scrobbles,
-      prev: week_daily_scrobbles	  
+      prev: week_daily_scrobbles
     })
 	};
 }

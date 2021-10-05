@@ -10,7 +10,7 @@ export class ListeningWeekComponent implements OnInit {
 	title = 'Listening Week';
 
 	constructor() { }
-	
+
 	ngOnInit(): void {
 	}
 
