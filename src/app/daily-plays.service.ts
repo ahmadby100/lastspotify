@@ -1,15 +1,22 @@
 import { Injectable } from '@angular/core';
 import { gOffset, ROOT_URL, getDate } from "./global";
 import * as $ from 'jquery';
+import { HttpClient } from '@angular/common/http';
 
 import { DBResponse } from "./types";
+import { Observable, of } from 'rxjs';
 
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class DailyPlaysService {
-  daily_plays = (offset: number, period: string): {curr: Object, prev: Object} => {
+  
+  constructor(private http: HttpClient) { }
+	daily_plays = (offset: number, period: string): Observable<{curr: Object, prev: Object}> /* (period: string, offset: number): Observable<DBResponse> */ => {
+		
+		// return this.http.get<DBResponse>(`${ROOT_URL}/tracksplayed/${period}/${offset}`)
 		let daily_scrobbles: any = { Monday: 0, Tuesday: 0, Wednesday: 0, Thursday: 0, Friday: 0, Saturday: 0, Sunday: 0 };
 		let week_daily_scrobbles: any = { Monday: 0, Tuesday: 0, Wednesday: 0, Thursday: 0, Friday: 0, Saturday: 0, Sunday: 0 };
 		for (let i in daily_scrobbles) daily_scrobbles[i] = 0;
@@ -19,6 +26,10 @@ export class DailyPlaysService {
 			$("#next_period").removeClass("text-gray-500 cursor-pointer").addClass("text-grey-300");
 		else
 			$("#next_period").addClass("text-gray-500 cursor-pointer").removeClass("text-gray-300");
+
+    
+
+
 
 		$.ajax({
 			url: `${ROOT_URL}/tracksplayed/${period}/${offset}`,
@@ -124,10 +135,9 @@ export class DailyPlaysService {
 			}
 		});
 
-    return {
+    return of({
       curr: daily_scrobbles,
-      prev: week_daily_scrobbles
-    }
+      prev: week_daily_scrobbles	  
+    })
 	};
-  constructor() { }
 }

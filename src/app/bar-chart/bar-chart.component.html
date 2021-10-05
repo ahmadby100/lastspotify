@@ -1,6 +1,10 @@
-<canvas baseChart
-        [datasets]="chartData"
-        [options]="chartOptions"
-        [legend]="chartLegend"
-        [type]="chartType">    
-</canvas>
+<div *ngIf="datastate">
+        <canvas 
+                baseChart
+                [datasets]="chartData"
+                [options]="chartOptions"
+                [legend]="chartLegend"
+                [type]="chartType">    
+        </canvas>
+</div>
+{{ datastate }}

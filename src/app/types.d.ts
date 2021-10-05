@@ -84,3 +84,8 @@ export interface chartConfig {
         }
     }
 }
+
+export interface daily_plays {
+    curr: Object,
+    prev: Object
+}
