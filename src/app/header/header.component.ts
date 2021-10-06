@@ -14,6 +14,12 @@ export class HeaderComponent implements OnInit {
   offset = offset;
   header_title = `<span class="text-red-600">last</span>+<span class="text-green-600">spotify</span>.`
   
+  
+
+  changePeriod = (newPeriod: "week" | "month" | "year" | "all") => {
+
+  }
+
   constructor() { }
 
   ngOnInit(): void {

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
 	selector: 'app-listening-week',
@@ -8,7 +8,6 @@ import { Component, OnInit } from '@angular/core';
 export class ListeningWeekComponent implements OnInit {
 
 	title = 'Listening Week';
-
 	constructor() { }
 
 	ngOnInit(): void {

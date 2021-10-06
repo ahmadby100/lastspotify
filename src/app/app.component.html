@@ -1,2 +1,56 @@
-<app-header></app-header>
-<app-listening-week></app-listening-week>
+<header class="text-gray-600 body-font">
+	<div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
+		<a class="relative z-10 flex items-center w-auto text-2xl font-extrabold leading-none text-black select-none"
+			[innerHTML]="header_title"></a>
+		<nav
+			class="md:mr-auto md:ml-4 md:py-1 md:pl-4 md:border-l md:border-gray-400	flex flex-wrap items-center text-base justify-center">
+			<a (click)="changePeriod('week')" class="mr-5 hover:text-gray-900 cursor-pointer" [ngClass]="{'font-bold': period == 'week'}">Week</a>
+			<a (click)="changePeriod('month')" class="mr-5 hover:text-gray-900 cursor-pointer" [ngClass]="{'font-bold': period == 'month'}">Month</a>
+			<a (click)="changePeriod('year')" class="mr-5 hover:text-gray-900 cursor-pointer" [ngClass]="{'font-bold': period == 'year'}">Year</a>
+			<a (click)="changePeriod('all')" class="mr-5 hover:text-gray-900 cursor-pointer" [ngClass]="{'font-bold': period == 'all'}">All Time</a>
+		</nav>
+        <div class="relative mr-5 text-gray-600">
+            <input class="border-2 border-gray-300 bg-white h-10 px-5 pr-16 transition-all duration-150 ease-in-out focus:w-md rounded-lg text-sm focus:outline-none"
+              type="search" name="search" placeholder="Search" autocomplete="off">
+            <button type="submit" class="absolute right-0 top-0 mt-3 mr-4">
+              <svg class="text-gray-600 h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px"
+                viewBox="0 0 56.966 56.966" style="enable-background:new 0 0 56.966 56.966;" xml:space="preserve"
+                width="512px" height="512px">
+                <path
+                  d="M55.146,51.887L41.588,37.786c3.486-4.144,5.396-9.358,5.396-14.786c0-12.682-10.318-23-23-23s-23,10.318-23,23  s10.318,23,23,23c4.761,0,9.298-1.436,13.177-4.162l13.661,14.208c0.571,0.593,1.339,0.92,2.162,0.92  c0.779,0,1.518-0.297,2.079-0.837C56.255,54.982,56.293,53.08,55.146,51.887z M23.984,6c9.374,0,17,7.626,17,17s-7.626,17-17,17  s-17-7.626-17-17S14.61,6,23.984,6z" />
+              </svg>
+            </button>
+          </div>
+		<span
+        class="inline-flex items-center bg-gray-100 border-0 p-3 rounded text-base mt-4 md:mt-0">
+			<a id="prev_period">
+				<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+					class="cursor-pointer w-5 h-5 ml-1 mr-4 transform rotate-180 " viewBox="0 0 24 24">
+					<path d="M5 12h14M12 5l7 7-7 7"></path>
+				</svg>
+			</a>
+			Your Music From <span id="time_period" class="font-bold text-gray-500"></span>
+			<a id="next_period">
+				<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+					class="cursor-pointer w-5 h-5 mr-1 ml-3" viewBox="0 0 24 24">
+					<path d="M5 12h14M12 5l7 7-7 7"></path>
+				</svg>
+			</a>
+		</span>
+	</div>
+</header>
+<!-- Section 2 -->
+<section class="w-full bg-white pt-7 pb-7 md:pt-20 md:pb-24 ">
+    <!-- Content -->    
+      <h1 class="sm:text-3xl text-3xl text-bold text-center">{{ title }}</h1>
+      <br>
+      <hr class="w-20 mx-auto border-2 border-blue-400 bg-blue-400 transform transition-all duration-300 ease-in-out hover:scale-x-150">
+      <br>
+      <h1 class="text-lg text-gray-500 text-center">You listened the most on <span id="most_listens"></span></h1>
+      <br>
+      <div class="w-full box-border flex flex-col items-center content-center px-8 mx-auto mt-2 leading-6 text-black border-0 border-gray-300 border-solid md:mt-20 xl:mt-0 md:flex-row max-w-7xl lg:px-16">
+          <app-bar-chart class="w-full" [period]="period"></app-bar-chart>    
+        </div>
+    <!-- End  Content -->
+</section>

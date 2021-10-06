@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import { gOffset, ROOT_URL, getDate, offset, period } from "./global";
+import { gOffset, ROOT_URL, getDate } from "./global";
 import * as $ from 'jquery';
-import { HttpClient } from '@angular/common/http';
 
 import { DBResponse } from "./types";
 import { Observable, of } from 'rxjs';
@@ -13,9 +12,8 @@ import { Observable, of } from 'rxjs';
 
 export class DailyPlaysService {
 
-  constructor(private http: HttpClient) { }
-	daily_plays = (/* offset: number, period: string */): Observable<{curr: Object, prev: Object }> /* (period: string, offset: number): Observable<DBResponse> */ => {
-		
+  constructor() { }
+	daily_plays = (period: "week" | "month" | "year" | "all", offset: number): Observable<{curr: Object, prev: Object }> => {
 
 		let daily_scrobbles: any = { Monday: 0, Tuesday: 0, Wednesday: 0, Thursday: 0, Friday: 0, Saturday: 0, Sunday: 0 };
 		let week_daily_scrobbles: any = { Monday: 0, Tuesday: 0, Wednesday: 0, Thursday: 0, Friday: 0, Saturday: 0, Sunday: 0 };
@@ -125,9 +123,9 @@ export class DailyPlaysService {
 
 			}
 		});
-    return of({
-      curr: daily_scrobbles,
-      prev: week_daily_scrobbles
-    })
+	return of({
+		curr: daily_scrobbles,
+		prev: week_daily_scrobbles
+	})
 	};
 }

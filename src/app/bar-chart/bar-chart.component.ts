@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ChartDataset, ChartOptions, ChartType } from 'chart.js';
-import { gOffset, ROOT_URL, getDate } from "../global";
+import { gOffset, ROOT_URL, getDate, offset } from "../global";
 import * as $ from 'jquery';
 
 import { daily_plays } from '../types'
@@ -16,9 +16,13 @@ import { DailyPlaysService } from '../daily-plays.service'
 export class BarChartComponent implements OnInit {
   curr_period: Object = {};
   prev_period: Object | null | undefined;
-  period: string = "week";
-  offset: number = 1;
+  // period: string = "week";
+  // offset: number = 1;
   datastate: boolean = false;
+
+  @Input('period') period: "week" | "month" | "year" | "all" = "week";
+  @Input('offset') offset: number = 1;
+
   
   delayed = false;
   chartOptions: ChartOptions = {
@@ -54,11 +58,11 @@ export class BarChartComponent implements OnInit {
   chartLegend = false;
   chartData: Array<{data: Object, label: string}> = [];
 
-  getChartData = ():  /* { curr: Object; prev: Object; state: boolean} */ void => {  
-
+  getChartData = (period: "week" | "month" | "year" | "all", offset: number): void => {  
+    console.log(this.period);
     
     // return this.dailyPlays.daily_plays(this.offset, this.period, this.datastate);
-    this.dailyPlays.daily_plays()
+    this.dailyPlays.daily_plays(period, offset)
       .subscribe((obj: daily_plays): void => {
         this.curr_period = obj.curr;
         this.prev_period = obj.prev;
@@ -85,7 +89,7 @@ export class BarChartComponent implements OnInit {
   
 
   constructor(private dailyPlays: DailyPlaysService) {
-    this.getChartData();
+    this.getChartData(this.period, offset);
    }
 
 
