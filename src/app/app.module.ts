@@ -8,13 +8,15 @@ import { AppComponent } from './app.component';
 import { ListeningWeekComponent } from './listening-week/listening-week.component';
 import { HeaderComponent } from './header/header.component';
 import { BarChartComponent } from './bar-chart/bar-chart.component';
+import { TopComponent } from './top/top.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ListeningWeekComponent,
     HeaderComponent,
-    BarChartComponent
+    BarChartComponent,
+    TopComponent
   ],
   imports: [
     BrowserModule,

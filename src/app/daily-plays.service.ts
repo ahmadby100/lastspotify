@@ -128,4 +128,14 @@ export class DailyPlaysService {
 		prev: week_daily_scrobbles
 	})
 	};
+
+	top = (period: "week" | "month" | "year" | "all", offset: number): any => {
+		const nullartwork = "/src/assets/img/musical-note.svg";
+		$.ajax({
+			url: `${ROOT_URL}/top/track/${period}/${offset}`,
+			success: data => {
+				$("#top_track").html()
+			}
+		})
+	}
 }
