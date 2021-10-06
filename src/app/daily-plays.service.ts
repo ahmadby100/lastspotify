@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { gOffset, ROOT_URL, getDate } from "./global";
+import { gOffset, ROOT_URL, getDate, offset, period } from "./global";
 import * as $ from 'jquery';
 import { HttpClient } from '@angular/common/http';
 
@@ -14,8 +14,8 @@ import { Observable, of } from 'rxjs';
 export class DailyPlaysService {
 
   constructor(private http: HttpClient) { }
-	daily_plays = (offset: number, period: string): Observable<{curr: Object, prev: Object }> /* (period: string, offset: number): Observable<DBResponse> */ => {
-
+	daily_plays = (/* offset: number, period: string */): Observable<{curr: Object, prev: Object }> /* (period: string, offset: number): Observable<DBResponse> */ => {
+		
 
 		let daily_scrobbles: any = { Monday: 0, Tuesday: 0, Wednesday: 0, Thursday: 0, Friday: 0, Saturday: 0, Sunday: 0 };
 		let week_daily_scrobbles: any = { Monday: 0, Tuesday: 0, Wednesday: 0, Thursday: 0, Friday: 0, Saturday: 0, Sunday: 0 };
@@ -31,7 +31,7 @@ export class DailyPlaysService {
 			url: `${ROOT_URL}/tracksplayed/${period}/${offset}`,
 			crossDomain: true,
 			success: (resp: DBResponse) => {
-				(resp.requestParams.period.from == "Beginning") ? $("#time_period").html("11 Nov 2018") : $("#time_period").html(`${getDate(resp.requestParams.period.from)} - ${getDate(resp.requestParams.period.to)}`)
+				(resp.requestParams.period.from == "Beginning") ? $("#time_period").html(`11 Nov 2018 - ${getDate(resp.requestParams.period.to)}`) : $("#time_period").html(`&nbsp;${getDate(resp.requestParams.period.from)} - ${getDate(resp.requestParams.period.to)}`)
 				for (let i = 0; i < resp.results.length; i++) {
 					switch (resp.results[i].weekday) {
 						case "Monday":

@@ -41,6 +41,7 @@ export class BarChartComponent implements OnInit {
       },
       scales: {
         y: {
+          
           type: "linear",
           display: false,
           position: "right"
@@ -57,29 +58,26 @@ export class BarChartComponent implements OnInit {
 
     
     // return this.dailyPlays.daily_plays(this.offset, this.period, this.datastate);
-    this.dailyPlays.daily_plays(this.offset, this.period)
+    this.dailyPlays.daily_plays()
       .subscribe((obj: daily_plays): void => {
-          this.curr_period = obj.curr;
-          this.prev_period = obj.prev;
-          let newData = [
-            {"data": this.curr_period, "label": `Current ${this.period}`},
-            {"data": this.prev_period, "label": `Previous ${this.period}`}
-          ];
-        
-        // let clone = JSON.parse(JSON.stringify(this.chartData));
-        // clone = newData;
-        this.chartData = newData; // clone;
+        this.curr_period = obj.curr;
+        this.prev_period = obj.prev;
+        let newData = [
+          {"data": this.curr_period, "label": `Current ${this.period}`},
+          {"data": this.prev_period, "label": `Previous ${this.period}`}
+        ];
+
+        this.chartData = newData;
         console.log(this.chartData);
         
         while (this.datastate) {
           
-          if (!$.isEmptyObject(this.chartData[0]) && !$.isEmptyObject(this.chartData[1]))
-            this.datastate = true;
+          if (!$.isEmptyObject(this.chartData[0]) && !$.isEmptyObject(this.chartData[1])) this.datastate = true;
         }
         
         setTimeout(() => {
           this.datastate = true;
-        }, 3500) 
+        }, 3500);
       });
   } 
   
@@ -88,37 +86,6 @@ export class BarChartComponent implements OnInit {
 
   constructor(private dailyPlays: DailyPlaysService) {
     this.getChartData();
-    console.log(this.chartData);
-    
-    console.log(this.datastate);
-    
-   
-    //   this.chartData = [
-    //     {
-    //         "data": {
-    //             "Monday": 116,
-    //             "Tuesday": 63,
-    //             "Wednesday": 36,
-    //             "Thursday": 0,
-    //             "Friday": 23,
-    //             "Saturday": 33,
-    //             "Sunday": 60
-    //         },
-    //         "label": "Current week"
-    //     },
-    //     {
-    //         "data": {
-    //             "Monday": 79,
-    //             "Tuesday": 37,
-    //             "Wednesday": 78,
-    //             "Thursday": 116,
-    //             "Friday": 35,
-    //             "Saturday": 60,
-    //             "Sunday": 56
-    //         },
-    //         "label": "Previous week"
-    //     }
-    // ]
    }
 
 

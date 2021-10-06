@@ -1,4 +1,4 @@
-<section class="fixed w-full px-8 text-gray-700 bg-gray-100 body-font z-50 shadow-md">
+<!-- <section class="fixed w-full px-8 text-gray-700 bg-gray-100 body-font z-50 shadow-md">
     <div class="container flex flex-col flex-nowrap items-center justify-between py-5 mx-auto md:flex-row max-w-7xl">
         <a class="relative z-10 flex items-center w-auto text-2xl font-extrabold leading-none text-black select-none" [innerHTML]="header_title"></a>
 
@@ -34,4 +34,33 @@
           <a onclick="next_btn();"><i class="fa fa-chevron-right ml-3 text-gray-300" id="next_period"></i></a>
       </h1>
     </div>
-  </section>
+  </section> -->
+<header class="text-gray-600 body-font">
+	<div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
+		<a class="relative z-10 flex items-center w-auto text-2xl font-extrabold leading-none text-black select-none"
+			[innerHTML]="header_title"></a>
+		<nav
+			class="md:mr-auto md:ml-4 md:py-1 md:pl-4 md:border-l md:border-gray-400	flex flex-wrap items-center text-base justify-center">
+			<a class="mr-5 hover:text-gray-900 cursor-pointer" [ngClass]="{'font-bold': period == 'week'}">Week</a>
+			<a class="mr-5 hover:text-gray-900 cursor-pointer" [ngClass]="{'font-bold': period == 'month'}">Month</a>
+			<a class="mr-5 hover:text-gray-900 cursor-pointer" [ngClass]="{'font-bold': period == 'year'}">Year</a>
+			<a class="mr-5 hover:text-gray-900 cursor-pointer" [ngClass]="{'font-bold': period == 'all'}">All Time</a>
+		</nav>
+		<span
+			class="inline-flex items-center bg-gray-100 border-0 p-3 rounded text-base mt-4 md:mt-0">
+			<a id="prev_period">
+				<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+					class="cursor-pointer w-5 h-5 ml-1 mr-4 transform rotate-180 " viewBox="0 0 24 24">
+					<path d="M5 12h14M12 5l7 7-7 7"></path>
+				</svg>
+			</a>
+			Your Music From <span id="time_period" class="font-bold text-gray-500"></span>
+			<a id="next_period">
+				<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+					class="cursor-pointer w-5 h-5 mr-1 ml-3" viewBox="0 0 24 24">
+					<path d="M5 12h14M12 5l7 7-7 7"></path>
+				</svg>
+			</a>
+		</span>
+	</div>
+</header>
