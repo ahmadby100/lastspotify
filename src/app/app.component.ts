@@ -14,6 +14,10 @@ export class AppComponent {
 
   @ViewChild(BarChartComponent) chart!: BarChartComponent;
 
+  timeTravel = (direction: string): void => {
+    (direction == "forwards") ? this.offset-- : this.offset++;
+  }
+
   changePeriod = (period: "week" | "month" | "year" | "all") => {
     this.period = period;
     // this.chart.getChartData(period, this.offset)

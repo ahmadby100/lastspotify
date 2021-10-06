@@ -24,15 +24,15 @@
           </div>
 		<span
         class="inline-flex items-center bg-gray-100 border-0 p-3 rounded text-base mt-4 md:mt-0">
-			<a id="prev_period">
+			<a id="prev_period" (click)="timeTravel('backwards')">
 				<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
 					class="cursor-pointer w-5 h-5 ml-1 mr-4 transform rotate-180 " viewBox="0 0 24 24">
 					<path d="M5 12h14M12 5l7 7-7 7"></path>
 				</svg>
 			</a>
 			Your Music From <span id="time_period" class="font-bold text-gray-500"></span>
-			<a id="next_period">
-				<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+			<a id="next_period" (click)="timeTravel('forwards')">
+				<svg fill="none" stroke="currentColor" [ngClass]="{'text-gray-400': offset == 1}" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
 					class="cursor-pointer w-5 h-5 mr-1 ml-3" viewBox="0 0 24 24">
 					<path d="M5 12h14M12 5l7 7-7 7"></path>
 				</svg>
