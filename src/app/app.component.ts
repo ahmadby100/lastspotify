@@ -10,7 +10,7 @@ export class AppComponent {
   title = 'Spotify Analysis';
   period: "week" | "month" | "year" | "all" = "week";
   offset = 1;
-  header_title = `<span class="text-red-600">last</span>+<span class="text-green-600">spotify</span>`
+  header_title = `<span class="text-red-600">last</span>+<span class="text-green-600">spotify</span>.`
 
   @ViewChild(BarChartComponent) chart!: BarChartComponent;
 
