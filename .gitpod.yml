@@ -1,12 +1,17 @@
 
 tasks:
-  - init: echo 'init script' # runs during prebuild
-    command: echo 'start script'
+  - name: Run Angular Dev Server
+    command: npm run dev
+  - name: Run CSS Compiler
+    command: npm run css
+
 
 # List the ports to expose. Learn more https://www.gitpod.io/docs/config-ports/
 ports:
   - port: 3000
     onOpen: open-preview
+  - port: 4200
+    onOpen: ignore
 
 vscode:
   extensions:
