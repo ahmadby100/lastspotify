@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { DailyPlaysService } from '../daily-plays.service';
+import { period, offset } from '../global';
 
 @Component({
   selector: 'app-top',
@@ -7,9 +9,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TopComponent implements OnInit {
 
-  constructor() { }
+  @Input() newPeriod: string = '';
+
+  ack = (period: string) => {
+    console.log(`Period: ${period} from Top`);
+  }
+
+  initTop = (period: string, offset: number) => {
+    this.service.top(period, offset);
+  }
+
+  constructor(private service: DailyPlaysService) { }
 
   ngOnInit(): void {
+    this.initTop(period, offset);
   }
 
 }

@@ -19,8 +19,9 @@ export class BarChartComponent implements OnInit {
   // period: string = "week";
   // offset: number = 1;
   datastate: boolean = false;
+  refreshInt = 1;
 
-  @Input('period') period: "week" | "month" | "year" | "all" = "week";
+  @Input('period') period: string = "week";
   @Input('offset') offset: number = 1;
 
   
@@ -58,12 +59,12 @@ export class BarChartComponent implements OnInit {
   chartLegend = false;
   chartData: Array<{data: Object, label: string}> = [];
 
-  getChartData = (period: "week" | "month" | "year" | "all", offset: number): void => {  
+  getChartData = (period: string, offset: number): boolean => {  
     console.log(this.period);
     
     // return this.dailyPlays.daily_plays(this.offset, this.period, this.datastate);
     this.dailyPlays.daily_plays(period, offset)
-      .subscribe((obj: daily_plays): void => {
+      .subscribe((obj: daily_plays): boolean => {
         this.curr_period = obj.curr;
         this.prev_period = obj.prev;
         let newData = [
@@ -82,16 +83,17 @@ export class BarChartComponent implements OnInit {
         setTimeout(() => {
           this.datastate = true;
         }, 3500);
+        return true;
       });
+      return true;
   } 
   
   
-  
+  test(period: string, offset: number) { console.log({period, offset})}
 
   constructor(private dailyPlays: DailyPlaysService) {
     this.getChartData(this.period, offset);
    }
-
 
 
   ngOnInit(): void {

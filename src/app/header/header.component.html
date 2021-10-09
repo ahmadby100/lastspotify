@@ -60,17 +60,17 @@
             </button>
           </div>
 		<span
-        class="inline-flex items-center bg-gray-100 border-0 p-3 rounded text-base mt-4 md:mt-0">
-			<a id="prev_period">
+        class="inline-flex items-center bg-gray-100 border-0 p-3 rounded text-base mt-4 md:mt-0 ">
+			<a id="prev_period" (click)="this.timeTravel('prev')">
 				<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-					class="cursor-pointer w-5 h-5 ml-1 mr-4 transform rotate-180 " viewBox="0 0 24 24">
+					class="cursor-pointer w-5 h-5 ml-1 mr-4 transform rotate-180 " viewBox="0 0 24 24" [ngClass]="{'text-gray-300 !cursor-default': this.period == 'all'}">
 					<path d="M5 12h14M12 5l7 7-7 7"></path>
 				</svg>
 			</a>
 			Your Music From <span id="time_period" class="font-bold text-gray-500"></span>
-			<a id="next_period">
+			<a id="next_period" (click)="this.timeTravel('next')">
 				<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-					class="cursor-pointer w-5 h-5 mr-1 ml-3" viewBox="0 0 24 24">
+					class="cursor-pointer w-5 h-5 mr-1 ml-3" viewBox="0 0 24 24" [ngClass]="{'text-gray-300 !cursor-default': offset == 1 || this.period == 'all'}">
 					<path d="M5 12h14M12 5l7 7-7 7"></path>
 				</svg>
 			</a>
