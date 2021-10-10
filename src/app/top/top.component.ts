@@ -11,6 +11,8 @@ export class TopComponent implements OnInit {
 
   @Input() newPeriod: string = '';
 
+
+
   ack = (period: string) => {
     console.log(`Period: ${period} from Top`);
   }
@@ -19,7 +21,9 @@ export class TopComponent implements OnInit {
     this.service.top(period, offset);
   }
 
-  constructor(private service: DailyPlaysService) { }
+  constructor(private service: DailyPlaysService) {
+    this.service.period_change.subscribe(val => console.log(`Period update from app-top: ${val}`))
+   }
 
   ngOnInit(): void {
     this.initTop(period, offset);

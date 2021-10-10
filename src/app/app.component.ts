@@ -30,20 +30,16 @@ export class AppComponent {
 
   changePeriod = (period: string) => {
     this.period = period;
-    console.log(`Period: ${this.period} from app-root`)
     this.offset = 1;
     this.service.top(this.period, this.offset);
     this.service.highlights(this.period, this.offset);
-    // this.chart.getChartData(this.period, this.offset)
-    // this.chart.test(this.period, this.offset);
-    console.log(this.period, "From app.component");
   }
   ngAfterViewInit() {
     setTimeout(() => this.dummy = () => this.chart.refreshInt, 0);
   }
   constructor(private service: DailyPlaysService) {
-    // header.periodChange.subscribe((val) => {
-    //   console.log(`Period: ${val} from Root App`);
-    // })
+    this.service.period_change.subscribe(val => console.log(`Period update from app-root: ${val}`))
   }
+  
+
 }

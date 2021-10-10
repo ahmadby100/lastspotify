@@ -5,17 +5,29 @@ import * as $ from 'jquery';
 import { DBResponse } from "./types";
 import { Observable, of, Subject } from 'rxjs';
 
-
 @Injectable({
   providedIn: 'root'
 })
 
 export class DailyPlaysService {
-	private local_period: Subject<string> = new Subject<string>();
-
-
+	local_period: string = "week";
+	period_change: Subject<string> = new Subject<string>();
+	offset: number = 1;
 	constructor() {
-
+		this.period_change.subscribe(val => {
+			this.local_period = val;
+			console.log(`Period Changed to "${this.local_period}" in service`);
+		})
+	}
+	alertChanges() {
+		this.period_change.next(this.local_period);
+	}
+	updateSettings(period: string, offset: number) {
+		this.local_period = period
+		this.offset = offset;
+		// console.log(`Period Changed to "${this.local_period}" in service`);
+		// console.log(`Offset Changed to "${this.offset}" in service`);
+		this.alertChanges();
 	}
 
 	daily_plays = (period: string, offset: number): Observable<{curr: Object, prev: Object}> => {

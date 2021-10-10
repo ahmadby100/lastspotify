@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ChartDataset, ChartOptions, ChartType } from 'chart.js';
 import { gOffset, ROOT_URL, getDate, offset } from "../global";
+import { Subscription } from 'rxjs'
 import * as $ from 'jquery';
 
 import { daily_plays } from '../types'
@@ -59,11 +60,11 @@ export class BarChartComponent implements OnInit {
   chartLegend = false;
   chartData: Array<{data: Object, label: string}> = [];
 
+  subscription!: Subscription;
   getChartData = (period: string, offset: number): boolean => {  
     console.log(this.period);
-    
     // return this.dailyPlays.daily_plays(this.offset, this.period, this.datastate);
-    this.dailyPlays.daily_plays(period, offset)
+    this.subscription = this.service.daily_plays(period, offset)
       .subscribe((obj: daily_plays): boolean => {
         this.curr_period = obj.curr;
         this.prev_period = obj.prev;
@@ -85,19 +86,28 @@ export class BarChartComponent implements OnInit {
         }, 3500);
         return true;
       });
-      return true;
+    this.subscription.unsubscribe();
+    return true;
   } 
   
   
   test(period: string, offset: number) { console.log({period, offset})}
 
-  constructor(private dailyPlays: DailyPlaysService) {
-    this.getChartData(this.period, offset);
+  constructor(private service: DailyPlaysService) {
+    this.service.period_change.subscribe(val => {
+      console.log(`Period update from app-bar-chart: ${val}`);
+      this.period = val;
+      this.getChartData(this.period, 1);
+    })
+
    }
 
 
   ngOnInit(): void {
     
+  }
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 
 }
