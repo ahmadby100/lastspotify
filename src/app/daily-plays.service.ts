@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { gOffset, ROOT_URL, getDate, period, offset } from "./global";
 import * as $ from 'jquery';
 
-import { DBResponse } from "./types";
+import { DBResponse, Top } from "./types";
 import { Observable, of, Subject } from 'rxjs';
 
 @Injectable({
@@ -148,11 +148,44 @@ export class DailyPlaysService {
 
 	top = (period: string, offset: number): any => {
 		const nullartwork = "assets/img/musical-note.svg";
+		let top_data: Top = {
+			track: {
+				top: {
+					title: '',
+					artist: '',
+					plays: 0,
+					img: ''
+				},
+				next: []
+			},
+			artist: {
+				top: {
+					title: '',
+					artist: '',
+					plays: 0,
+					img: ''
+				},
+				next: []
+			},
+			album: {
+				top: {
+					title: '',
+					artist: '',
+					plays: 0,
+					img: ''
+				},
+				next: []
+			}
+		};
+
 		$.ajax({
 			url: `${ROOT_URL}/top/track/${period}/${offset}`,
 			crossDomain: true,
 			success: data => {
-				console.log(data, data.requestParams);
+				top_data.track.top.title = data.results[0].track;
+				top_data.track.top.artist = data.results[0].artist;
+				top_data.track.top.plays = data.results[0].plays;
+				
 				$("#top_track").html(data.results[0].track);
 				(data.requestParams.period.from == "Beginning") ? $("#time_period").html(`11 Nov 2018 - ${getDate(data.requestParams.period.to)}`) : $("#time_period").html(`&nbsp;${getDate(data.requestParams.period.from)} - ${getDate(data.requestParams.period.to)}`);
 				$("#top_track_artist").html(data.results[0].artist);
@@ -160,18 +193,33 @@ export class DailyPlaysService {
 					$("#top_track_img").attr("src", nullartwork);
 					$("#top_track_img").addClass("bg-gray-300");
 				}
-				else
+				else {
+					top_data.track.top.img = data.results[0].album_image;
 					$("#top_track_img").attr("src", data.results[0].album_image);
+				}
+				
 				$("#top_track_plays").html(data.results[0].plays + " plays");
-				for (let k = 1; k <= 4; k++) {
+				
+				for (let k = 1; k <= 10; k++) {
+					let i = k - 1
+					let temp = {
+						title: data.results[k].track,
+						artist: data.results[k].track,
+						plays: data.results[k].plays,
+						img: nullartwork
+					}
 					$(`#${k + 1}_track`).html(data.results[k].track);
 					$(`#${k + 1}_track_artist`).html(data.results[k].artist);
 					if (data.results[k].album_image == null) {
 						$(`#${k + 1}_track_img`).addClass("bg-gray-300");
 						$(`#${k + 1}_track_img`).attr("src", nullartwork);
 					}
-					else
+					else {
 						$(`#${k + 1}_track_img`).attr("src", data.results[k].album_image);
+						temp.img = data.results[k].album_image;
+					}
+					top_data.track.next.push(temp);
+					
 				}
 			}
 		});
@@ -179,40 +227,68 @@ export class DailyPlaysService {
 			url: `${ROOT_URL}/top/album/${period}/${offset}`,
 			crossDomain: true,
 			success: (data) => {
+				top_data.album.top.title = data.results[0].album;
+				top_data.album.top.artist = data.results[0].artist;
+				top_data.album.top.plays = data.results[0].plays;
+
 				$("#top_album").html(data.results[0].album);
 				$("#top_album_artist").html(data.results[0].artist);
 				$("#top_album_img").attr("src", data.results[0].album_image);
 				$("#top_album_plays").html(data.results[0].plays + " plays");
-				for (let k = 1; k <= 4; k++) {
+				for (let k = 1; k <= 10; k++) {
+					let temp = {
+						title: data.results[k].album,
+						artist: data.results[k].artist,
+						plays: data.results[k].plays,
+						img: nullartwork
+					}
 					$(`#${k + 1}_album`).html(data.results[k].album);
 					$(`#${k + 1}_album_artist`).html(data.results[k].artist);
 					if (data.results[k].album_image == null) {
 						$(`#${k + 1}_album_img`).addClass("bg-gray-300");
 						$(`#${k + 1}_album_img`).attr("src", nullartwork);
 					}
-					else
+					else {
 						$(`#${k + 1}_album_img`).attr("src", data.results[k].album_image);
+						temp.img = data.results[k].album_image;
+					}
+					top_data.album.next.push(temp);
 				}
 			}
 		});
 		$.ajax({
 			url: `${ROOT_URL}/top/artist/${period}/${offset}`,
 			crossDomain: true,
-			success: (data) => {
+			success: (data) => {				
+				top_data.artist.top.artist = data.results[0].artist;
+				top_data.artist.top.plays = data.results[0].plays;
+
 				$("#top_artist").html(data.results[0].artist);
 				$("#top_artist_img").attr("src", data.results[0].artist_image);
 				$("#top_artist_plays").html(data.results[0].plays + " plays");
-				for (let k = 1; k <= 4; k++) {
+				for (let k = 1; k <= 10; k++) {
+					let temp = {
+						title: data.results[k].artist,
+						artist: data.results[k].artist,
+						plays: data.results[k].plays,
+						img: nullartwork
+					}
 					$(`#${k + 1}_artist`).html(data.results[k].artist);
-					if (data.results[k].artist_image == null) {
+					if (data.results[k].artist_image == null || data.results[k].artist_image == undefined) {
 						$(`#${k + 1}_artist_img`).attr("src", nullartwork);
 						$(`#${k + 1}_artist_img`).addClass("bg-gray-300");
 					}
-					else
+					else {
 						$(`#${k + 1}_artist_img`).attr("src", data.results[k].artist_image);
+						temp.img = data.results[k].album_image;
+					}
+					top_data.artist.next.push(temp);
 				}
 			}
 		});
+		
+		console.log(top_data);
+		return top_data;
 	}
 	private eventCallback = new Subject<string>();
 	
