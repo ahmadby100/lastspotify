@@ -24,14 +24,14 @@ export class AppComponent {
   timeTravel = (offset: number): void => {
     this.period = period;
     this.offset = offset;
-    this.service.top(this.period, this.offset);
+    // this.service.top(this.period, this.offset);
     this.service.highlights(this.period, this.offset);
   }
 
   changePeriod = (period: string) => {
     this.period = period;
     this.offset = 1;
-    this.service.top(this.period, this.offset);
+    // this.service.top(this.period, this.offset);
     this.service.highlights(this.period, this.offset);
   }
   ngAfterViewInit() {

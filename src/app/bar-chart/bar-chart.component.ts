@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, SimpleChange, SimpleChanges } from '@angular/core';
 import { ChartDataset, ChartOptions, ChartType } from 'chart.js';
 import { gOffset, ROOT_URL, getDate, offset } from "../global";
 import { Subscription } from 'rxjs'
@@ -7,6 +7,7 @@ import * as $ from 'jquery';
 import { daily_plays } from '../types'
 
 import { DailyPlaysService } from '../daily-plays.service'
+import { BaseChartDirective } from 'ng2-charts';
 
 
 @Component({
@@ -21,6 +22,8 @@ export class BarChartComponent implements OnInit {
   // offset: number = 1;
   datastate: boolean = false;
   refreshInt = 1;
+
+  @ViewChild(BaseChartDirective) chart!: BaseChartDirective;
 
   @Input('period') period: string = "week";
   @Input('offset') offset: number = 1;
@@ -58,12 +61,19 @@ export class BarChartComponent implements OnInit {
   chartLabels: string[] = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
   chartType: ChartType = "bar";
   chartLegend = false;
-  chartData: Array<{data: Object, label: string}> = [];
+  chartData: any[] = [
+    {
+      "data": {Monday: 0, Tuesday: 10, Wednesday: 20, Thursday: 30, Friday: 40, Saturday: 50, Sunday: 60}, 
+      "label": "Current "
+    },
+    {
+      "data": {Monday: 0, Tuesday: 10, Wednesday: 20, Thursday: 30, Friday: 40, Saturday: 50, Sunday: 60}, 
+      "label": "Previous"
+    }
+  ];
 
   subscription!: Subscription;
   getChartData = (period: string, offset: number): boolean => {  
-    console.log(this.period);
-    // return this.dailyPlays.daily_plays(this.offset, this.period, this.datastate);
     this.subscription = this.service.daily_plays(period, offset)
       .subscribe((obj: daily_plays): boolean => {
         this.curr_period = obj.curr;
@@ -77,18 +87,40 @@ export class BarChartComponent implements OnInit {
         console.log(this.chartData);
         
         while (this.datastate) {
-          
           if (!$.isEmptyObject(this.chartData[0]) && !$.isEmptyObject(this.chartData[1])) this.datastate = true;
         }
         
         setTimeout(() => {
           this.datastate = true;
-        }, 3500);
+          console.log(this.chart)
+
+        }, 5000);
         return true;
       });
     this.subscription.unsubscribe();
     return true;
   } 
+  updateChart = (period: string, offset: number) => {
+    this.chart.chart?.update("hide");
+    console.log("Prev Data:",this.chartData[0].data);
+    this.subscription = this.service.daily_plays(period, offset).subscribe((obj: daily_plays) => {
+      this.curr_period = obj.curr;
+      this.prev_period = obj.prev;
+      let newData = [
+        {"data": this.curr_period, "label": `Current ${this.period}`},
+        {"data": this.prev_period, "label": `Previous ${this.period}`}
+      ]
+      this.chartData = newData;
+      console.log("New Data:", this.chartData);
+      console.log(this.chart.chart?.update("show"));
+      this.chartData = [null];
+      this.chartData = newData;
+      this.chart.update();
+    });
+    console.log("Updating Chart");
+    this.chart.chart?.update();
+    this.subscription.unsubscribe();
+  }
   
   
   test(period: string, offset: number) { console.log({period, offset})}
@@ -97,14 +129,18 @@ export class BarChartComponent implements OnInit {
     this.service.period_change.subscribe(val => {
       console.log(`Period update from app-bar-chart: ${val}`);
       this.period = val;
-      this.getChartData(this.period, 1);
+      this.updateChart(this.period, 1);
+      console.log(`Running UpdateChart Function`);
+      this.chart.update();
+
     })
 
    }
 
 
   ngOnInit(): void {
-    
+    this.getChartData(this.period, this.offset);
+    setTimeout(() => console.log(this.chart), 10000)
   }
   ngOnDestroy(): void {
     this.subscription.unsubscribe();

@@ -56,21 +56,6 @@ body {
   font-family: inherit;
   line-height: inherit;
 }
-button {
-  text-transform: none;
-  background-color: transparent;
-  background-image: none;
-}
-button, [type='button'], [type='reset'], [type='submit'] {
-  -webkit-appearance: button;
-}
-button:focus {
-  outline: 1px dotted;
-  outline: 5px auto -webkit-focus-ring-color;
-}
-button, [role="button"] {
-  cursor: pointer;
-}
 b, strong {
   font-weight: bolder;
 }
@@ -86,8 +71,23 @@ button, input, optgroup, select, textarea {
 button, select {
   text-transform: none;
 }
+button, [type='button'], [type='reset'], [type='submit'] {
+  -webkit-appearance: button;
+}
 blockquote, dl, dd, h1, h2, h3, h4, h5, h6, hr, figure, p, pre {
   margin: 0;
+}
+button {
+  background-color: transparent;
+  background-image: none;
+  text-transform: none;
+}
+button:focus {
+  outline: 1px dotted;
+  outline: 5px auto -webkit-focus-ring-color;
+}
+button, [role="button"] {
+  cursor: pointer;
 }
 canvas {
   display: block;
@@ -118,6 +118,10 @@ h1 {
   font-weight: inherit;
   margin: 0;
 }
+h1, h2, h3, h4, h5, h6 {
+  font-size: inherit;
+  font-weight: inherit;
+}
 h1, hr, h2, p {
   margin: 0;
 }
@@ -125,18 +129,12 @@ h1, h2 {
   font-size: inherit;
   font-weight: inherit;
 }
-h1, h2, h3, h4, h5, h6 {
-  font-size: inherit;
-  font-weight: inherit;
-}
-input, button {
-  font-family: inherit;
-  font-size: 100%;
-  line-height: 1.15;
-  margin: 0;
-  padding: 0;
-  line-height: inherit;
-  color: inherit;
+img {
+  border-style: solid;
+  display: block;
+  vertical-align: middle;
+  max-width: 100%;
+  height: auto;
 }
 input::placeholder {
   opacity: 1;
@@ -158,13 +156,6 @@ input::-ms-input-placeholder {
   opacity: 1;
   color: #9ca3af;
 }
-img {
-  border-style: solid;
-  display: block;
-  vertical-align: middle;
-  max-width: 100%;
-  height: auto;
-}
 img, svg, video, canvas, audio, iframe, embed, object {
   display: block;
   vertical-align: middle;
@@ -172,6 +163,15 @@ img, svg, video, canvas, audio, iframe, embed, object {
 img, video {
   max-width: 100%;
   height: auto;
+}
+input, button {
+  font-family: inherit;
+  font-size: 100%;
+  line-height: 1.15;
+  margin: 0;
+  padding: 0;
+  line-height: inherit;
+  color: inherit;
 }
 legend {
   padding: 0;
@@ -186,10 +186,6 @@ progress {
 }
 pre, code, kbd, samp {
   font-family: ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
-}
-svg {
-  display: block;
-  vertical-align: middle;
 }
 small {
   font-size: 80%;
@@ -208,6 +204,10 @@ sup {
 }
 summary {
   display: list-item;
+}
+svg {
+  display: block;
+  vertical-align: middle;
 }
 table {
   text-indent: 0;
