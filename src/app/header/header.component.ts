@@ -20,12 +20,14 @@ export class HeaderComponent implements OnInit {
   @Output() newOffset = new EventEmitter<number>();
   sub: any;
   periodChange: Subject<string> = new Subject<string>();
+  offsetChange: Subject<number> = new Subject<number>();
   
   constructor(private service: DailyPlaysService) {
     this.service.period_change.subscribe(val => {
       console.log(`Period update from app-header: ${val}`);
     })
   }
+
   get getPeriod(): string {
     return this.service.local_period;
   }
@@ -52,6 +54,7 @@ export class HeaderComponent implements OnInit {
     }
     (direction == 'prev') ? this.offset++ : this.offset--;
     console.log(`Setting Offset: ${this.offset}`);
+    this.offsetChange.next(this.offset);
     this.newOffset.emit(this.offset);
     this.service.updateSettings(this.period, this.offset);
   }

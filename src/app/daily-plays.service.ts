@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { gOffset, ROOT_URL, getDate, period, offset } from "./global";
 import * as $ from 'jquery';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { DBResponse, Single, Top } from "./types";
 import { Observable, of, Subject } from 'rxjs';
@@ -12,22 +13,36 @@ import { Observable, of, Subject } from 'rxjs';
 export class DailyPlaysService {
 	local_period: string = "week";
 	period_change: Subject<string> = new Subject<string>();
-	offset: number = 1;
-	constructor() {
+	offset_change: Subject<number> = new Subject<number>();
+	local_offset: number = 1;
+	constructor(private http: HttpClient) {
 		this.period_change.subscribe(val => {
 			this.local_period = val;
 			console.log(`Period Changed to "${this.local_period}" in service`);
 		})
+		this.offset_change.subscribe(val => {
+			this.local_offset = val;
+			console.log(`Offset Changed to "${this.local_offset}" in service`);
+		})
 	}
-	alertChanges() {
-		this.period_change.next(this.local_period);
+	alertChanges(type: string) {
+		if (type == "period")
+			this.period_change.next(this.local_period);
+		if (type == "offset") 
+			this.offset_change.next(this.local_offset);
+		
 	}
 	updateSettings(period: string, offset: number) {
-		this.local_period = period
-		this.offset = offset;
-		// console.log(`Period Changed to "${this.local_period}" in service`);
-		// console.log(`Offset Changed to "${this.offset}" in service`);
-		this.alertChanges();
+		if (this.local_period != period) {
+			this.local_period = period;
+			this.alertChanges("period")
+			console.log(`Period Changed to "${this.local_period}" in service`);
+		}
+		if (this.local_offset != offset) {
+			this.local_offset = offset;
+			this.alertChanges("offset");
+			console.log(`Offset Changed to "${this.local_offset}" in service`);
+		}
 	}
 
 	daily_plays = (period: string, offset: number): Observable<{curr: Object, prev: Object}> => {
@@ -147,52 +162,11 @@ export class DailyPlaysService {
 	};
 
 
-	top2 = async (type: string, period: string, offset: number): Promise<any> => {
+	top2 = (type: string, period: string, offset: number): Observable<any> => {
 		const nullartwork = "assets/img/musical-note.svg";
-		let rd: Single;
-		console.log($.ajax({
-			url: `${ROOT_URL}/top/${type}/${period}/${offset}`,
-			crossDomain: true,
-			success: data => {
-				(data.requestParams.period.from == "Beginning") ? $("#time_period").html(`11 Nov 2018 - ${getDate(data.requestParams.period.to)}`) : $("#time_period").html(`&nbsp;${getDate(data.requestParams.period.from)} - ${getDate(data.requestParams.period.to)}`);
-				
-				// rd.top.img = nullartwork;
-				if (type == "track")
-					rd.top.title = data.results[0].track;
-				if (type == "album")
-					rd.top.title = data.results[0].album
-				
-				rd.top.artist = data.results[0].artist;
-				rd.top.plays = data.results[0].plays;
-				
-				if (data.results[0].album_image == null) {
-					$("#top_track_img").addClass("bg-gray-300");
-				} else {
-					rd.top.img = data.results[0].album_image;
-				}
-				
-				for (let k = 1; k <= 10; k++) {
-					let temp = {
-						title: data.results[k].track,
-						artist: data.results[k].track,
-						plays: data.results[k].plays,
-						img: nullartwork
-					}
-					if (data.results[k].album_image == null) {
-						$(`#${k + 1}_track_img`).addClass("bg-gray-300");
-					}
-					else {
-						$(`#${k + 1}_track_img`).attr("src", data.results[k].album_image);
-						temp.img = data.results[k].album_image;
-					}
-					rd.next.push(temp);
-				}
-				return rd;
-			}
-		}))
-		// console.log(rd);
-
-		// return rd;
+		let j = this.http.get<any>(`${ROOT_URL}/top/${type}/${period}/${offset}`)
+		console.log(j);
+		return j;	
 	}
 	top = (period: string, offset: number): any => {
 		const nullartwork = "assets/img/musical-note.svg";
