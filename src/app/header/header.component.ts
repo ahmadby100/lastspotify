@@ -54,8 +54,6 @@ export class HeaderComponent implements OnInit {
     console.log(`Setting Offset: ${this.offset}`);
     this.newOffset.emit(this.offset);
     this.service.updateSettings(this.period, this.offset);
-      
-    
   }
 
 

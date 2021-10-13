@@ -89,8 +89,8 @@ export interface daily_plays {
     curr: Object,
     prev: Object
 }
-export interface TopType {
-    title: string,
+interface TopType {
+    title?: string,
     artist: string,
     img: string,
     plays: number
@@ -108,4 +108,9 @@ export interface Top {
         top: TopType,
         next: Array<TopType>
     }
+}
+
+export interface Single {
+    top: TopType,
+    next: Array<TopType>
 }

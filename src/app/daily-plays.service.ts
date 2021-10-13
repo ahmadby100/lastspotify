@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { gOffset, ROOT_URL, getDate, period, offset } from "./global";
 import * as $ from 'jquery';
 
-import { DBResponse, Top } from "./types";
+import { DBResponse, Single, Top } from "./types";
 import { Observable, of, Subject } from 'rxjs';
 
 @Injectable({
@@ -146,6 +146,54 @@ export class DailyPlaysService {
 	})
 	};
 
+
+	top2 = async (type: string, period: string, offset: number): Promise<any> => {
+		const nullartwork = "assets/img/musical-note.svg";
+		let rd: Single;
+		console.log($.ajax({
+			url: `${ROOT_URL}/top/${type}/${period}/${offset}`,
+			crossDomain: true,
+			success: data => {
+				(data.requestParams.period.from == "Beginning") ? $("#time_period").html(`11 Nov 2018 - ${getDate(data.requestParams.period.to)}`) : $("#time_period").html(`&nbsp;${getDate(data.requestParams.period.from)} - ${getDate(data.requestParams.period.to)}`);
+				
+				// rd.top.img = nullartwork;
+				if (type == "track")
+					rd.top.title = data.results[0].track;
+				if (type == "album")
+					rd.top.title = data.results[0].album
+				
+				rd.top.artist = data.results[0].artist;
+				rd.top.plays = data.results[0].plays;
+				
+				if (data.results[0].album_image == null) {
+					$("#top_track_img").addClass("bg-gray-300");
+				} else {
+					rd.top.img = data.results[0].album_image;
+				}
+				
+				for (let k = 1; k <= 10; k++) {
+					let temp = {
+						title: data.results[k].track,
+						artist: data.results[k].track,
+						plays: data.results[k].plays,
+						img: nullartwork
+					}
+					if (data.results[k].album_image == null) {
+						$(`#${k + 1}_track_img`).addClass("bg-gray-300");
+					}
+					else {
+						$(`#${k + 1}_track_img`).attr("src", data.results[k].album_image);
+						temp.img = data.results[k].album_image;
+					}
+					rd.next.push(temp);
+				}
+				return rd;
+			}
+		}))
+		// console.log(rd);
+
+		// return rd;
+	}
 	top = (period: string, offset: number): any => {
 		const nullartwork = "assets/img/musical-note.svg";
 		let top_data: Top = {
@@ -283,13 +331,9 @@ export class DailyPlaysService {
 					top_data.artist.next.push(temp);
 				}
 			}
-		});
+		})
 		
 		console.log(top_data);
-		// while (complete != 3) {
-			
-		// 	setTimeout(() => console.log(`${complete} call(s) complete`), 1000);
-		// }
 		return top_data;
 	}
 	private eventCallback = new Subject<string>();
