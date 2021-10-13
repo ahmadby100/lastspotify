@@ -186,9 +186,9 @@ export class DailyPlaysService {
 				top_data.track.top.artist = data.results[0].artist;
 				top_data.track.top.plays = data.results[0].plays;
 				
-				$("#top_track").html(data.results[0].track);
+				// $("#top_track").html(data.results[0].track);
 				(data.requestParams.period.from == "Beginning") ? $("#time_period").html(`11 Nov 2018 - ${getDate(data.requestParams.period.to)}`) : $("#time_period").html(`&nbsp;${getDate(data.requestParams.period.from)} - ${getDate(data.requestParams.period.to)}`);
-				$("#top_track_artist").html(data.results[0].artist);
+				// $("#top_track_artist").html(data.results[0].artist);
 				if (data.results[0].album_image == null) {
 					$("#top_track_img").attr("src", nullartwork);
 					$("#top_track_img").addClass("bg-gray-300");
@@ -198,7 +198,7 @@ export class DailyPlaysService {
 					$("#top_track_img").attr("src", data.results[0].album_image);
 				}
 				
-				$("#top_track_plays").html(data.results[0].plays + " plays");
+				// $("#top_track_plays").html(data.results[0].plays + " plays");
 				
 				for (let k = 1; k <= 10; k++) {
 					let i = k - 1
@@ -219,7 +219,6 @@ export class DailyPlaysService {
 						temp.img = data.results[k].album_image;
 					}
 					top_data.track.next.push(temp);
-					
 				}
 			}
 		});
@@ -231,10 +230,10 @@ export class DailyPlaysService {
 				top_data.album.top.artist = data.results[0].artist;
 				top_data.album.top.plays = data.results[0].plays;
 
-				$("#top_album").html(data.results[0].album);
-				$("#top_album_artist").html(data.results[0].artist);
+				// $("#top_album").html(data.results[0].album);
+				// $("#top_album_artist").html(data.results[0].artist);
 				$("#top_album_img").attr("src", data.results[0].album_image);
-				$("#top_album_plays").html(data.results[0].plays + " plays");
+				// $("#top_album_plays").html(data.results[0].plays + " plays");
 				for (let k = 1; k <= 10; k++) {
 					let temp = {
 						title: data.results[k].album,
@@ -263,9 +262,8 @@ export class DailyPlaysService {
 				top_data.artist.top.artist = data.results[0].artist;
 				top_data.artist.top.plays = data.results[0].plays;
 
-				$("#top_artist").html(data.results[0].artist);
 				$("#top_artist_img").attr("src", data.results[0].artist_image);
-				$("#top_artist_plays").html(data.results[0].plays + " plays");
+				// $("#top_artist_plays").html(data.results[0].plays + " plays");
 				for (let k = 1; k <= 10; k++) {
 					let temp = {
 						title: data.results[k].artist,
@@ -288,6 +286,10 @@ export class DailyPlaysService {
 		});
 		
 		console.log(top_data);
+		// while (complete != 3) {
+			
+		// 	setTimeout(() => console.log(`${complete} call(s) complete`), 1000);
+		// }
 		return top_data;
 	}
 	private eventCallback = new Subject<string>();
