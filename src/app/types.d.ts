@@ -89,11 +89,11 @@ export interface daily_plays {
     curr: Object,
     prev: Object
 }
-interface TopType {
-    title?: string,
-    artist: string,
-    img: string,
-    plays: number
+export interface TopType {
+    title?: string | undefined,
+    artist: string | undefined,
+    img: string | undefined,
+    plays: number | undefined
 }
 export interface Top {
     track: {
@@ -113,4 +113,9 @@ export interface Top {
 export interface Single {
     top: TopType,
     next: Array<TopType>
+}
+export interface Next {
+    track: Array<TopType>,
+    album: Array<TopType>,
+    artist: Array<TopType>
 }

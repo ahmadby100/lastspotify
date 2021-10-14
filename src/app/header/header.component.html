@@ -1,44 +1,8 @@
-<!-- <section class="fixed w-full px-8 text-gray-700 bg-gray-100 body-font z-50 shadow-md">
-    <div class="container flex flex-col flex-nowrap items-center justify-between py-5 mx-auto md:flex-row max-w-7xl">
-        <a class="relative z-10 flex items-center w-auto text-2xl font-extrabold leading-none text-black select-none" [innerHTML]="header_title"></a>
-
-        <nav class="top-0 left-0 z-0 flex items-center justify-center w-full h-full py-5 -ml-10 space-x-5 text-base md:-ml-5 md:py-0 absolute">
-            <a onclick="changePeriod('week', this)" class="cursor-pointer period-tabs relative font-bold leading-6 text-gray-600 transition duration-150 ease-out hover:text-gray-900" x-data="{ hover: false }">
-                <span class="block">Week</span>
-                <span class="absolute bottom-0 left-0 inline-block w-full h-0.5 -mb-1 overflow-hidden">
-                    <span x-show="hover" class="absolute inset-0 inline-block w-full h-1 h-full transform bg-gray-900" style="display: none;"></span>
-                </span>
-            </a>
-            <a onclick="changePeriod('month', this)" class="cursor-pointer period-tabs relative font-medium leading-6 text-gray-600 transition duration-150 ease-out hover:text-gray-900" x-data="{ hover: false }">
-                <span class="block">Month</span>
-                <span class="absolute bottom-0 left-0 inline-block w-full h-0.5 -mb-1 overflow-hidden">
-                    <span x-show="hover" class="absolute inset-0 inline-block w-full h-1 h-full transform bg-gray-900" style="display: none;"></span>
-                </span>
-            </a>
-            <a onclick="changePeriod('year', this)" class="cursor-pointer period-tabs relative font-medium leading-6 text-gray-600 transition duration-150 ease-out hover:text-gray-900" x-data="{ hover: false }">
-                <span class="block">Year</span>
-                <span class="absolute bottom-0 left-0 inline-block w-full h-0.5 -mb-1 overflow-hidden">
-                    <span x-show="hover" class="absolute inset-0 inline-block w-full h-1 h-full transform bg-gray-900" style="display: none;"></span>
-                </span>
-            </a>
-            <a onclick="changePeriod('all', this)" class="cursor-pointer period-tabs relative font-medium active:font-bold leading-6 text-gray-600 transition duration-150 ease-out hover:text-gray-900" x-data="{ hover: false }">
-                <span class="block">All Time</span>
-                <span class="absolute bottom-0 left-0 inline-block w-full h-0.5 -mb-1 overflow-hidden">
-                    <span x-show="hover" class="absolute inset-0 inline-block w-full h-full transform bg-gray-900" style="display: none;"></span>
-                </span>
-            </a>
-        </nav>
-        <h1 class="text-lg font-bold leading-tight text-center z-50">
-          <a onclick="prev_btn();"><i class="fa fa-chevron-left mr-3 text-gray-500 cursor-pointer" id="prev_period"></i></a>
-          Your Music From <span id="time_period"></span> 
-          <a onclick="next_btn();"><i class="fa fa-chevron-right ml-3 text-gray-300" id="next_period"></i></a>
-      </h1>
-    </div>
-  </section> -->
 <header class="text-gray-600 body-font">
 	<div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
-		<a class="relative z-10 flex items-center w-auto text-2xl font-extrabold leading-none text-black select-none"
-			[innerHTML]="header_title"></a>
+		<a class="relative z-10 flex items-center w-auto text-2xl font-extrabold leading-none text-black select-none">
+            <span class="text-red-600">last</span>+<span class="text-green-600">spotify</span>.
+        </a>
 		<nav
 			class="md:mr-auto md:ml-4 md:py-1 md:pl-4 md:border-l md:border-gray-400	flex flex-wrap items-center text-base justify-center">
 			<a (click)="changePeriod('week')" class="mr-5 hover:text-gray-900 cursor-pointer" [ngClass]="{'font-bold': period == 'week'}">Week</a>
@@ -48,7 +12,7 @@
 		</nav>
         <div class="relative mr-5 text-gray-600">
             <input class="border-2 border-gray-300 bg-white h-10 px-5 pr-16 transition-all duration-150 ease-in-out focus:w-md rounded-lg text-sm focus:outline-none"
-              type="search" name="search" placeholder="Search" autocomplete="off">
+              type="search" name="search" placeholder="Search for a track/artist/album" autocomplete="off">
             <button type="submit" class="absolute right-0 top-0 mt-3 mr-4">
               <svg class="text-gray-600 h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg"
                 xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px"
@@ -63,14 +27,14 @@
         class="inline-flex items-center bg-gray-100 border-0 p-3 rounded text-base mt-4 md:mt-0 ">
 			<a id="prev_period" (click)="this.timeTravel('prev')">
 				<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-					class="cursor-pointer w-5 h-5 ml-1 mr-4 transform rotate-180 " viewBox="0 0 24 24" [ngClass]="{'text-gray-300 !cursor-default': this.period == 'all'}">
+					class="cursor-pointer w-5 h-5 ml-1 mr-4 transform rotate-180 " viewBox="0 0 24 24" [ngClass]="{'text-gray-300 !cursor-default' : prevBtn }">
 					<path d="M5 12h14M12 5l7 7-7 7"></path>
 				</svg>
 			</a>
-			Your Music From <span id="time_period" class="font-bold text-gray-500"></span>
+			Your Music From <span id="time_period" class="font-bold text-gray-500">&nbsp;{{ curr_date }} </span>
 			<a id="next_period" (click)="this.timeTravel('next')">
 				<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-					class="cursor-pointer w-5 h-5 mr-1 ml-3" viewBox="0 0 24 24" [ngClass]="{'text-gray-300 !cursor-default': offset == 1 || this.period == 'all'}">
+					class="cursor-pointer w-5 h-5 mr-1 ml-3" viewBox="0 0 24 24" [ngClass]="{'text-gray-300 !cursor-default': nextBtn }">
 					<path d="M5 12h14M12 5l7 7-7 7"></path>
 				</svg>
 			</a>

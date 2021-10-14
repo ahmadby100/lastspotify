@@ -60,134 +60,49 @@
           </div>
         </div>
         <div class="flex flex-wrap -m-4">
-          <div class="p-4 w-full md:w-1/3">
+          <div class="p-4 w-full md:w-1/3" >
             <!-- Artist -->
-            <div class="flex border-2 rounded-lg border-gray-200 border-opacity-50 p-4 sm:flex-row flex-col mb-3 items-center justify-center">
-              <span class="inline-flex pr-3 text-sm font-medium">2</span>
-              <div class="w-16 h-16 sm:mr-8 sm:mb-0 mb-4 inline-flex rounded-md bg-gray-300 text-purple-500 flex-shrink-0">
-                <img src="https://i.scdn.co/image/ab67616d0000b2732aa34d5906e01231eff70f82" alt="" class="rounded-md"  id="2_artist_img">
+            <span *ngFor="let artist of this.next.artist; let index = index">
+              <div class="flex border-2 rounded-lg border-gray-200 border-opacity-50 p-4 sm:flex-row flex-col mb-3 items-center justify-center">
+                <span class="inline-flex pr-3 text-sm font-medium">{{index + 2}}</span>
+                <div class="w-16 h-16 sm:mr-8 sm:mb-0 mb-4 inline-flex rounded-md bg-gray-300 text-purple-500 flex-shrink-0">
+                  <img src="{{ artist.img }}" alt="" class="rounded-md"  >
+                </div>
+                <div class="flex-grow">
+                  <h2 class="text-gray-900 text-sm font-semibold mb-2"> {{ artist.artist }} </h2>
+                </div>
               </div>
-              <div class="flex-grow">
-                <h2 class="text-gray-900 text-sm font-semibold mb-2" id="2_artist">Sweet Trip</h2>
-                
-              </div>
-            </div>
-            <div class="flex border-2 rounded-lg border-gray-200 border-opacity-50 p-4 sm:flex-row flex-col mb-3 items-center justify-center">
-              <span class="inline-flex pr-3 text-sm font-medium">3</span>
-              <div class="w-16 h-16 sm:mr-8 sm:mb-0 mb-4 inline-flex rounded-md bg-gray-300 text-purple-500 flex-shrink-0">
-                <img src="https://i.scdn.co/image/ab67616d0000b2732aa34d5906e01231eff70f82" alt="" class="rounded-md" id="3_artist_img">
-              </div>
-              <div class="flex-grow">
-                <h2 class="text-gray-900 text-sm font-semibold mb-2" id="3_artist">Sweet Trip</h2>
-                
-              </div>
-            </div>
-            <div class="flex border-2 rounded-lg border-gray-200 border-opacity-50 p-4 sm:flex-row flex-col mb-3 items-center justify-center">
-              <span class="inline-flex pr-3 text-sm font-medium">4</span>
-              <div class="w-16 h-16 sm:mr-8 sm:mb-0 mb-4 inline-flex rounded-md bg-gray-300 text-purple-500 flex-shrink-0">
-                <img src="https://i.scdn.co/image/ab67616d0000b2732aa34d5906e01231eff70f82" alt="" class="rounded-md" id="4_artist_img">
-              </div>
-              <div class="flex-grow">
-                <h2 class="text-gray-900 text-sm font-semibold mb-2" id="4_artist">Sweet Trip</h2>
-                
-              </div>
-            </div>
-            <div class="flex border-2 rounded-lg border-gray-200 border-opacity-50 p-4 sm:flex-row flex-col mb-3 items-center justify-center">
-              <span class="inline-flex pr-3 text-sm font-medium">5</span>
-              <div class="w-16 h-16 sm:mr-8 sm:mb-0 mb-4 inline-flex rounded-md bg-gray-300 text-purple-500 flex-shrink-0">
-                <img src="https://i.scdn.co/image/ab67616d0000b2732aa34d5906e01231eff70f82" alt="" class="rounded-md" id="5_artist_img">
-              </div>
-              <div class="flex-grow">
-                <h2 class="text-gray-900 text-sm font-semibold mb-2" id="5_artist">Sweet Trip</h2>
-                
-              </div>
-            </div>
+            </span>
           </div>
           <div class="p-4 w-full md:w-1/3">
             <!-- Album -->
+            <span *ngFor="let album of this.next.album; let i = index">
               <div class="flex border-2 rounded-lg border-gray-200 border-opacity-50 p-4 sm:flex-row flex-col mb-3 items-center justify-center">
-                <span class="inline-flex pr-3 text-sm font-medium">2</span>
+                <span class="inline-flex pr-3 text-sm font-medium">{{ i + 2 }}</span>
                 <div class="w-16 h-16 sm:mr-8 sm:mb-0 mb-4 inline-flex rounded-md bg-gray-300 text-purple-500 flex-shrink-0">
-                  <img src="https://i.scdn.co/image/ab67616d0000b2732aa34d5906e01231eff70f82" alt="" class="rounded-md" id="2_album_img">
+                  <img src="{{ album.img }}" alt="" class="rounded-md">
                 </div>
                 <div class="flex-grow">
-                  <h2 class="text-gray-900 text-sm font-semibold mb-2" id="2_album">Ceres & Calypso in the Deep Time</h2>
-                  <p class="leading-none text-xs font-bold" id="2_album_artist">Candy Claws</p>
+                  <h2 class="text-gray-900 text-sm font-semibold mb-2">{{ album.title }}</h2>
+                  <p class="leading-none text-xs font-bold" id="2_album_artist">{{ album.artist }}</p>
                 </div>
               </div>
-              <div class="flex border-2 rounded-lg border-gray-200 border-opacity-50 p-4 sm:flex-row flex-col mb-3 items-center justify-center">
-                <span class="inline-flex pr-3 text-sm font-medium">3</span>
-                <div class="w-16 h-16 sm:mr-8 sm:mb-0 mb-4 inline-flex rounded-md bg-gray-300 text-purple-500 flex-shrink-0">
-                  <img src="https://i.scdn.co/image/ab67616d0000b2732aa34d5906e01231eff70f82" alt="" class="rounded-md" id="3_album_img">
-                </div>
-                <div class="flex-grow">
-                  <h2 class="text-gray-900 text-sm font-semibold mb-2" id="3_album">A Tiny House, in Secret Speeches, Polar Equals</h2>
-                  <p class="leading-none text-xs font-bold" id="3_album_artist">Sweet Trip</p>
-                </div>
-              </div>
-              <div class="flex border-2 rounded-lg border-gray-200 border-opacity-50 p-4 sm:flex-row flex-col mb-3 items-center justify-center">
-                <span class="inline-flex pr-3 text-sm font-medium">4</span>
-                <div class="w-16 h-16 sm:mr-8 sm:mb-0 mb-4 inline-flex rounded-md bg-gray-300 text-purple-500 flex-shrink-0">
-                  <img src="https://i.scdn.co/image/ab67616d0000b2732aa34d5906e01231eff70f82" alt="" class="rounded-md" id="4_album_img">
-                </div>
-                <div class="flex-grow">
-                  <h2 class="text-gray-900 text-sm font-semibold mb-2" id="4_album">Sweet Trip</h2>
-                  <p class="leading-none text-xs font-bold" id="4_album_artist">Sweet Trip</p>
-                </div>
-              </div>
-              <div class="flex border-2 rounded-lg border-gray-200 border-opacity-50 p-4 sm:flex-row flex-col mb-3 items-center justify-center">
-                <span class="inline-flex pr-3 text-sm font-medium">5</span>
-                <div class="w-16 h-16 sm:mr-8 sm:mb-0 mb-4 inline-flex rounded-md bg-gray-300 text-purple-500 flex-shrink-0">
-                  <img src="https://i.scdn.co/image/ab67616d0000b2732aa34d5906e01231eff70f82" alt="" class="rounded-md" id="5_album_img">
-                </div>
-                <div class="flex-grow">
-                  <h2 class="text-gray-900 text-sm font-semibold mb-2" id="5_album">Sweet Trip</h2>
-                  <p class="leading-none text-xs font-bold" id="5_album_artist">Sweet Trip</p>
-                </div>
-              </div>
+            </span>
           </div>
           <div class="p-4 w-full md:w-1/3">
             <!-- Track -->
-            <div class="flex border-2 rounded-lg border-gray-200 border-opacity-50 p-4 sm:flex-row flex-col mb-3 items-center justify-center">
-              <span class="inline-flex pr-3 text-sm font-medium">2</span>
-              <div class="w-16 h-16 sm:mr-8 sm:mb-0 mb-4 inline-flex rounded-md bg-gray-300 text-purple-500 flex-shrink-0">
-                <img src="https://i.scdn.co/image/ab67616d0000b2732aa34d5906e01231eff70f82" alt="" class="rounded-md" id="2_track_img">
+            <span *ngFor="let track of this.next.track; let i = index">
+              <div class="flex border-2 rounded-lg border-gray-200 border-opacity-50 p-4 sm:flex-row flex-col mb-3 items-center justify-center">
+                <span class="inline-flex pr-3 text-sm font-medium">{{ i + 2 }}</span>
+                <div class="w-16 h-16 sm:mr-8 sm:mb-0 mb-4 inline-flex rounded-md bg-gray-300 text-purple-500 flex-shrink-0">
+                  <img src="{{ track.img }}" alt="" class="rounded-md">
+                </div>
+                <div class="flex-grow">
+                  <h2 class="text-gray-900 text-sm font-semibold mb-2">{{ track.title }}</h2>
+                  <p class="leading-none text-xs font-bold">{{ track.artist }} </p>
+                </div>
               </div>
-              <div class="flex-grow">
-                <h2 class="text-gray-900 text-sm font-semibold mb-2" id="2_track">Ceres & Calypso in the Deep Time</h2>
-                <p class="leading-none text-xs font-bold" id="2_track_artist">Candy Claws</p>
-              </div>
-            </div>
-            <div class="flex border-2 rounded-lg border-gray-200 border-opacity-50 p-4 sm:flex-row flex-col mb-3 items-center justify-center">
-              <span class="inline-flex pr-3 text-sm font-medium">3</span>
-              <div class="w-16 h-16 sm:mr-8 sm:mb-0 mb-4 inline-flex rounded-md bg-gray-300 text-purple-500 flex-shrink-0">
-                <img src="https://i.scdn.co/image/ab67616d0000b2732aa34d5906e01231eff70f82" alt="" class="rounded-md" id="3_track_img">
-              </div>
-              <div class="flex-grow">
-                <h2 class="text-gray-900 text-sm font-semibold mb-2" id="3_track">A Tiny House, in Secret Speeches, Polar Equals</h2>
-                <p class="leading-none text-xs font-bold" id="3_track_artist">Sweet Trip</p>
-              </div>
-            </div>
-            <div class="flex border-2 rounded-lg border-gray-200 border-opacity-50 p-4 sm:flex-row flex-col mb-3 items-center justify-center">
-              <span class="inline-flex pr-3 text-sm font-medium">4</span>
-              <div class="w-16 h-16 sm:mr-8 sm:mb-0 mb-4 inline-flex rounded-md bg-gray-300 text-purple-500 flex-shrink-0">
-                <img src="https://i.scdn.co/image/ab67616d0000b2732aa34d5906e01231eff70f82" alt="" class="rounded-md" id="4_track_img">
-              </div>
-              <div class="flex-grow">
-                <h2 class="text-gray-900 text-sm font-semibold mb-2" id="4_track">Sweet Trip</h2>
-                <p class="leading-none text-xs font-bold" id="4_track_artist">Sweet Trip</p>
-              </div>
-            </div>
-            <div class="flex border-2 rounded-lg border-gray-200 border-opacity-50 p-4 sm:flex-row flex-col mb-3 items-center justify-center">
-              <span class="inline-flex pr-3 text-sm font-medium">5</span>
-              <div class="w-16 h-16 sm:mr-8 sm:mb-0 mb-4 inline-flex rounded-md bg-gray-300 text-purple-500 flex-shrink-0">
-                <img src="https://i.scdn.co/image/ab67616d0000b2732aa34d5906e01231eff70f82" alt="" class="rounded-md" id="5_track_img">
-              </div>
-              <div class="flex-grow">
-                <h2 class="text-gray-900 text-sm font-semibold mb-2" id="5_track">Sweet Trip</h2>
-                <p class="leading-none text-xs font-bold" id="5_track_artist">Sweet Trip</p>
-              </div>
-            </div>
+            </span>
           </div>
         </div>
       </div>

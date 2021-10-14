@@ -1,7 +1,7 @@
 // Variables
 export let gOffset = 1;
 export let offset: number = 1;
-export let period: string = "month";
+export let period: string = "week";
 export const ROOT_URL: string = "https://us-central1-bluetables-81eca.cloudfunctions.net/app";
 
 // Arrays

@@ -11,6 +11,10 @@ import { period, offset } from './global';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  private css = "color: orange;";
+  private logapp = (log: any) => {
+		console.log(`%cRoot: ${log}`, this.css);	
+	}
   dummy = () => 0;
   period: string = 'week';
   offset = 1;
@@ -38,7 +42,7 @@ export class AppComponent {
     setTimeout(() => this.dummy = () => this.chart.refreshInt, 0);
   }
   constructor(private service: DailyPlaysService) {
-    this.service.period_change.subscribe(val => console.log(`Period update from app-root: ${val}`))
+    this.service.period_change.subscribe(val => this.logapp(`Period Update: ${val}`))
   }
   
 

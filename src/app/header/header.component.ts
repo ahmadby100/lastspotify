@@ -14,18 +14,19 @@ import { DailyPlaysService } from '../daily-plays.service';
 export class HeaderComponent implements OnInit {
   period: string = period;
   offset: number = 1;
-  header_title = `<span class="text-red-600">last</span>+<span class="text-green-600">spotify</span>.`
-  
-  @Output() newPeriod = new EventEmitter<string>();
-  @Output() newOffset = new EventEmitter<number>();
+  curr_date = "";
+  prevBtn = false;
+  nextBtn = true;
+  private css = "color: lightcoral;";
+  private logheader = (log: any) => {
+		console.log(`%cHeader: ${log}`, this.css);	
+	}
   sub: any;
   periodChange: Subject<string> = new Subject<string>();
   offsetChange: Subject<number> = new Subject<number>();
   
   constructor(private service: DailyPlaysService) {
-    this.service.period_change.subscribe(val => {
-      console.log(`Period update from app-header: ${val}`);
-    })
+    this.service.curr_date.subscribe(date => this.curr_date = date);
   }
 
   get getPeriod(): string {
@@ -35,14 +36,13 @@ export class HeaderComponent implements OnInit {
   
 
   changePeriod = (newPeriod: string) => {
-    console.log(`Setting Period: ${newPeriod}`);
-    this.service.updateSettings(newPeriod, 1);
+    this.logheader(`Setting Period: ${newPeriod}`);
     this.period = newPeriod;
     this.offset = 1;
-    this.periodChange.next(this.period);
-    this.newPeriod.emit(newPeriod);
-
+    this.disableButtons();
+    this.service.updateSettings(this.period, this.offset);
   }
+
   timeTravel = (direction: string) => {
     if (this.offset == 1 && direction == 'next') {
       alert("Cannot travel to the future")
@@ -52,13 +52,33 @@ export class HeaderComponent implements OnInit {
       alert("Thats it");
       return;
     }
+    if (this.period == "year" && this.offset == 3 && direction == "prev") {
+      alert("Final Year");
+      return;
+    }
     (direction == 'prev') ? this.offset++ : this.offset--;
-    console.log(`Setting Offset: ${this.offset}`);
-    this.offsetChange.next(this.offset);
-    this.newOffset.emit(this.offset);
+    this.disableButtons();
+    this.logheader(`Setting Offset: ${this.offset}`);
     this.service.updateSettings(this.period, this.offset);
   }
 
+  disableButtons = () => {
+    this.prevBtn = this.nextBtn = false;
+    if (this.period == "all") {
+      this.nextBtn = true;
+      this.prevBtn = true;
+      return
+    }
+    if (this.offset == 1) {
+      this.nextBtn = true;
+      console.log("disable forwards");
+      return
+    }
+    if (this.period == "year" && this.offset == 3) {
+      this.prevBtn = true;
+      return
+    }
+  }
 
   ngOnInit(): void {
   }
