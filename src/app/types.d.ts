@@ -10,9 +10,9 @@ interface DB_result {
     type?: string,
     album_image?: string,
     artist_image?: string
-    time_played?: number
+    time_played?: string,
     avg_plays?: number
-    hour?: string
+    hour?: number
     rtype?: string,
     genres?: string,
     img?: string
@@ -118,4 +118,30 @@ export interface Next {
     track: Array<TopType>,
     album: Array<TopType>,
     artist: Array<TopType>
+}
+
+export interface Highlights {
+    curr_plays: DBResponse,
+    curr_active: DBResponse,
+    curr_time: DBResponse
+    prev_plays?: DBResponse,
+    prev_active?: DBResponse,
+    prev_time?: DBResponse
+}
+export interface Discoveries {
+    track: {
+        plays: DBResponse,
+        data: DBResponse,
+        prev?: DBResponse
+    },
+    album: {
+        plays: DBResponse,
+        data: DBResponse,
+        prev?: DBResponse
+    },
+    artist: {
+        plays: DBResponse,
+        data: DBResponse,
+        prev?: DBResponse
+    }
 }

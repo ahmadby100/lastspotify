@@ -10,6 +10,7 @@ import { HeaderComponent } from './header/header.component';
 import { BarChartComponent } from './bar-chart/bar-chart.component';
 import { TopComponent } from './top/top.component';
 import { HighlightsComponent } from './highlights/highlights.component';
+import { DiscoveriesComponent } from './discoveries/discoveries.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { HighlightsComponent } from './highlights/highlights.component';
     HeaderComponent,
     BarChartComponent,
     TopComponent,
-    HighlightsComponent
+    HighlightsComponent,
+    DiscoveriesComponent
   ],
   imports: [
     BrowserModule,

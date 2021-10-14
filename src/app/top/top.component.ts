@@ -98,12 +98,12 @@ export class TopComponent implements OnInit {
   }
 
   constructor(private service: DailyPlaysService) {
-    this.service.period_change.subscribe(async (period) => {
+    this.service.period_change.subscribe(async period => {
       this.logtop(`Period Update: ${period}`);
       const top_data = await this.service.top(period, 1);
       this.updateTop(top_data);
     });
-    this.service.offset_change.subscribe(async (offset) => {
+    this.service.offset_change.subscribe(async offset => {
       this.logtop(`Offset Update: ${offset}`);
       const top_data = await this.service.top(this.service.getPeriod, offset);
       this.updateTop(top_data);

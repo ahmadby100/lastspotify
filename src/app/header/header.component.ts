@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { period, offset } from "../global";
 import { Subject } from 'rxjs';
 import { DailyPlaysService } from '../daily-plays.service';
@@ -71,7 +71,6 @@ export class HeaderComponent implements OnInit {
     }
     if (this.offset == 1) {
       this.nextBtn = true;
-      console.log("disable forwards");
       return
     }
     if (this.period == "year" && this.offset == 3) {

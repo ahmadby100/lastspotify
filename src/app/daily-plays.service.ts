@@ -3,7 +3,7 @@ import { gOffset, ROOT_URL, getDate, period, offset } from "./global";
 import * as $ from 'jquery';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
-import { DBResponse, Single, Top } from "./types";
+import { DBResponse, Discoveries, Highlights, Single, Top } from "./types";
 import { Observable, of, Subject } from 'rxjs';
 
 @Injectable({
@@ -11,51 +11,29 @@ import { Observable, of, Subject } from 'rxjs';
 })
 
 export class DailyPlaysService {
-	constructor(private http: HttpClient) {}
-	
-	private css = "color: lightblue;";
-	local_period: string = "week";
-	period_change: Subject<string> = new Subject<string>();
-	offset_change: Subject<number> = new Subject<number>();
-	curr_date: Subject<string> = new Subject<string>();
-	local_offset: number = 1;
-
-	private logservice = (log: any) => {
-		console.log(`%cService: ${log}`, this.css);	
-	}
-	
+	constructor(private http: HttpClient) {}	
 	
 	public get getPeriod() : string {
 		return this.local_period;
 	}
-	
 	public get getOffset() : number {
 		return this.local_offset;
 	}
 	
+	period_change: Subject<string> = new Subject<string>();
+	offset_change: Subject<number> = new Subject<number>();
 	
-
-	alertChanges(type: string) {
-		if (type == "period")
-			this.period_change.next(this.local_period);
-		if (type == "offset") 
-			this.offset_change.next(this.local_offset);
-		
-	}
-	updateSettings(period: string, offset: number) {
-		this.logservice(`Received Settings {"period": ${period}, "offset": ${offset}} from header`);
-		if (this.local_period != period) {
-			this.local_period = period;
-			this.logservice(`Period Changed to "${this.local_period}"`);
-			this.alertChanges("period")
-		}
-		if (this.local_offset != offset) {
-			this.local_offset = offset;
-			this.logservice(`Offset Changed to "${this.local_offset}" in service`);
-			this.alertChanges("offset");
-		}
+	curr_date: Subject<string> = new Subject<string>();
+	
+	local_period: string = "week";
+	local_offset: number = 1;
+	
+	private css = "color: lightblue;";
+	private logservice = (log: any) => {
+		console.log(`%cService: ${log}`, this.css);	
 	}
 
+	// Component Functions
 	daily_plays = (period: string, offset: number): Observable<{curr: Object, prev: Object}> => {
 
 		let daily_scrobbles: any = { Monday: 0, Tuesday: 0, Wednesday: 0, Thursday: 0, Friday: 0, Saturday: 0, Sunday: 0 };
@@ -172,15 +150,6 @@ export class DailyPlaysService {
 	})
 	};
 
-	setDate(from: string, to: string) {
-		let date = `${getDate(from)} - ${getDate(to)}`;
-		if (from == "Beginning") {
-			date = `11 Nov 2018 - ${getDate(to)}`;
-		}
-		this.curr_date.next(date);
-	}
-
-
 	top = async (period: string, offset: number): Promise<{track: DBResponse, album: DBResponse, artist: DBResponse}> => {
 		const track = await this.http.get<DBResponse>(`${ROOT_URL}/top/track/${period}/${offset}`).toPromise();
 		const album = await this.http.get<DBResponse>(`${ROOT_URL}/top/album/${period}/${offset}`).toPromise();
@@ -193,64 +162,111 @@ export class DailyPlaysService {
 			album: album,
 			artist: artist
 		}
-	}
-	private eventCallback = new Subject<string>();
-	
-	highlights = (period: string, offset: number) => {
-		let curr: number = 0;
-		let prev: number = 0;
-		$.ajax({
-			url: `${ROOT_URL}/duration/${period}/${offset}`,
-			success: data => {
-				this.logservice(data);
-				let timeplayed = data.results[0].time_played.split(":");
-				let hour = parseInt(timeplayed[0]);
-				curr = hour;
-				if (hour >= 24) {
-					let day: string;
-					(hour / 24 > 2) ? day = " Days, " : day = " Day, ";
-					$("#highlights_listen").html(`${Math.round(hour / 24)}${day}${Math.round((hour / 24 - Math.floor(hour / 24)) * 24)} Hours`)
-					
-				} else 
-					$("#highlights_listen").html(`${hour} Hours`);			
-			}
-		});
-		if (period != "all")
-        $.ajax({
-            url: `${ROOT_URL}/duration/${period}/${offset + 1}`,
-            success: data => {
-                $("#highlights_prev_listen").show();
-				let timeplayed = data.results[0].time_played.split(":");
-				let hour = parseInt(timeplayed[0]);
-				prev = hour;
-                $("#listen2").html(hour.toString());
-				if (hour >= 24) {
-					let day: string;
-					(hour / 24 > 2) ? day = " Days, " : day = " Day, ";
-					$("#highlights_last_listen").html(`${Math.round(hour / 24)}${day}${Math.round((hour / 24 - Math.floor(hour / 24)) * 24)} Hours`)
-				} else 
-					$("#highlights_last_listen").html(`${hour} Hours`);	
-                this.calcPercent("last_listen");
-            }
-        });
+	};
 
-	}
-
-	// Misc Functions
-	percentCount = 0;
-	calcPercent = (type: string) => {
-		this.percentCount++;
-		if (this.percentCount == 2) {
-			this.percentCount = 0;
-			let val1 = parseInt($(`#${type}1`).html());
-			let val2 = parseInt($(`#${type}2`).html());
-			let percent = (val1 - val2) / val2 * 100;
-			// this.logservice(percent);
-			if (percent < 0) {
-				percent = -percent;
-				$(`#highlights_${type}_arrow`).removeClass("rotate-180");
+	highlights = async (period: string, offset: number): Promise<Highlights> => {
+		const curr_plays = await this.http.get<DBResponse>(`${ROOT_URL}/plays/${period}/${offset}`).toPromise();
+		const curr_time = await this.http.get<DBResponse>(`${ROOT_URL}/duration/${period}/${offset}`).toPromise();
+		const curr_active = await this.http.get<DBResponse>(`${ROOT_URL}/activehour/${period}/${offset}`).toPromise();
+		
+		if (this.local_period != "all") {
+			const prev_plays = await this.http.get<DBResponse>(`${ROOT_URL}/plays/${period}/${offset + 1}`).toPromise();
+			const prev_time = await this.http.get<DBResponse>(`${ROOT_URL}/duration/${period}/${offset +  1}`).toPromise();
+			const prev_active = await this.http.get<DBResponse>(`${ROOT_URL}/activehour/${period}/${offset + 1}`).toPromise();
+			return {
+				curr_active: curr_active,
+				curr_plays: curr_plays,
+				curr_time: curr_time,
+				prev_active: prev_active,
+				prev_time: prev_time,
+				prev_plays: prev_plays
 			}
-			$(`#highlights_${type}_percent`).html(`${percent}%`);
+		} else {
+			return {
+				curr_active: curr_active,
+				curr_plays: curr_plays,
+				curr_time: curr_time
+			}
 		}
 	};
+
+	discoveries = async (period: string, offset: number): Promise<Discoveries> => {
+		const curr_tracks = await this.http.get<DBResponse>(`${ROOT_URL}/new/track/${period}/${offset}`).toPromise();
+		const curr_albums = await this.http.get<DBResponse>(`${ROOT_URL}/new/album/${period}/${offset}`).toPromise();
+		const curr_artists = await this.http.get<DBResponse>(`${ROOT_URL}/new/artist/${period}/${offset}`).toPromise();
+		
+		const curr_track_plays = await this.http.get<DBResponse>(`${ROOT_URL}/totalnew/track/${period}/${offset}`).toPromise();
+		const curr_album_plays = await this.http.get<DBResponse>(`${ROOT_URL}/totalnew/album/${period}/${offset}`).toPromise();
+		const curr_artist_plays = await this.http.get<DBResponse>(`${ROOT_URL}/totalnew/artist/${period}/${offset}`).toPromise();
+		
+
+		if (this.local_period != "all") {
+			const prev_track_plays = await this.http.get<DBResponse>(`${ROOT_URL}/totalnew/track/${period}/${offset + 1}`).toPromise();
+			const prev_album_plays = await this.http.get<DBResponse>(`${ROOT_URL}/totalnew/album/${period}/${offset + 1}`).toPromise();
+			const prev_artist_plays = await this.http.get<DBResponse>(`${ROOT_URL}/totalnew/artist/${period}/${offset + 1}`).toPromise();
+			
+			return {
+					track: {
+						plays: curr_track_plays,
+						data: curr_tracks,
+						prev: prev_track_plays
+					},
+					album: {
+						plays: curr_album_plays,
+						data: curr_albums,
+						prev: prev_album_plays
+					},
+					artist: {
+						plays: curr_artist_plays,
+						data: curr_artists,
+						prev: prev_artist_plays
+					},
+			}
+		}
+		return {
+				track: {
+					plays: curr_track_plays,
+					data: curr_tracks
+				},
+				album: {
+					plays: curr_album_plays,
+					data: curr_albums
+				},
+				artist: {
+					plays: curr_artist_plays,
+					data: curr_artists
+				}
+		}
+	};
+
+	// Settings Functions
+	alertChanges(type: string) {
+		if (type == "period")
+			this.period_change.next(this.local_period);
+		if (type == "offset") 
+			this.offset_change.next(this.local_offset);
+		
+	}
+	updateSettings(period: string, offset: number) {
+		this.logservice(`Received Settings {"period": ${period}, "offset": ${offset}} from header`);
+		if (this.local_period != period) {
+			this.local_period = period;
+			this.logservice(`Period Changed to "${this.local_period}"`);
+			this.alertChanges("period")
+		}
+		if (this.local_offset != offset) {
+			this.local_offset = offset;
+			this.logservice(`Offset Changed to "${this.local_offset}" in service`);
+			this.alertChanges("offset");
+		}
+	};
+
+	// Misc Functions
+	setDate(from: string, to: string) {
+		let date = `${getDate(from)} - ${getDate(to)}`;
+		if (from == "Beginning") {
+			date = `11 Nov 2018 - ${getDate(to)}`;
+		}
+		this.curr_date.next(date);
+	}
 }
