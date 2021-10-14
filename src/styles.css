@@ -56,6 +56,21 @@ body {
   font-family: inherit;
   line-height: inherit;
 }
+button {
+  text-transform: none;
+  background-color: transparent;
+  background-image: none;
+}
+button, [type='button'], [type='reset'], [type='submit'] {
+  -webkit-appearance: button;
+}
+button:focus {
+  outline: 1px dotted;
+  outline: 5px auto -webkit-focus-ring-color;
+}
+button, [role="button"] {
+  cursor: pointer;
+}
 b, strong {
   font-weight: bolder;
 }
@@ -71,30 +86,15 @@ button, input, optgroup, select, textarea {
 button, select {
   text-transform: none;
 }
-button, [type='button'], [type='reset'], [type='submit'] {
-  -webkit-appearance: button;
-}
 blockquote, dl, dd, h1, h2, h3, h4, h5, h6, hr, figure, p, pre {
   margin: 0;
-}
-button {
-  background-color: transparent;
-  background-image: none;
-  text-transform: none;
-}
-button:focus {
-  outline: 1px dotted;
-  outline: 5px auto -webkit-focus-ring-color;
-}
-button, [role="button"] {
-  cursor: pointer;
-}
-code, kbd, samp, pre {
-  font-size: 1em;
 }
 canvas {
   display: block;
   vertical-align: middle;
+}
+code, kbd, samp, pre {
+  font-size: 1em;
 }
 fieldset {
   margin: 0;
@@ -117,10 +117,6 @@ h1 {
   font-size: inherit;
   font-weight: inherit;
 }
-h1, h2, h3, h4, h5, h6 {
-  font-size: inherit;
-  font-weight: inherit;
-}
 h1, hr, h2, p {
   margin: 0;
 }
@@ -128,15 +124,18 @@ h1, h2 {
   font-size: inherit;
   font-weight: inherit;
 }
-h1, hr, h2 {
-  margin: 0;
+h1, h2, h3, h4, h5, h6 {
+  font-size: inherit;
+  font-weight: inherit;
 }
-img {
-  border-style: solid;
-  display: block;
-  vertical-align: middle;
-  max-width: 100%;
-  height: auto;
+input, button {
+  font-family: inherit;
+  font-size: 100%;
+  line-height: 1.15;
+  margin: 0;
+  padding: 0;
+  line-height: inherit;
+  color: inherit;
 }
 input::placeholder {
   opacity: 1;
@@ -158,6 +157,13 @@ input::-ms-input-placeholder {
   opacity: 1;
   color: #9ca3af;
 }
+img {
+  border-style: solid;
+  display: block;
+  vertical-align: middle;
+  max-width: 100%;
+  height: auto;
+}
 img, svg, video, canvas, audio, iframe, embed, object {
   display: block;
   vertical-align: middle;
@@ -165,15 +171,6 @@ img, svg, video, canvas, audio, iframe, embed, object {
 img, video {
   max-width: 100%;
   height: auto;
-}
-input, button {
-  font-family: inherit;
-  font-size: 100%;
-  line-height: 1.15;
-  margin: 0;
-  padding: 0;
-  line-height: inherit;
-  color: inherit;
 }
 legend {
   padding: 0;
@@ -188,6 +185,10 @@ progress {
 }
 pre, code, kbd, samp {
   font-family: ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
+}
+svg {
+  display: block;
+  vertical-align: middle;
 }
 small {
   font-size: 80%;
@@ -206,10 +207,6 @@ sup {
 }
 summary {
   display: list-item;
-}
-svg {
-  display: block;
-  vertical-align: middle;
 }
 table {
   text-indent: 0;
@@ -633,9 +630,6 @@ textarea::-ms-input-placeholder {
 .pr-3 {
   padding-right: 0.75rem;
 }
-.fixed {
-  position: fixed;
-}
 .absolute {
   position: absolute;
 }
@@ -681,17 +675,17 @@ textarea::-ms-input-placeholder {
   --tw-text-opacity: 1;
   color: rgba(75, 85, 99, var(--tw-text-opacity));
 }
+.text-red-600 {
+  --tw-text-opacity: 1;
+  color: rgba(220, 38, 38, var(--tw-text-opacity));
+}
+.text-green-600 {
+  --tw-text-opacity: 1;
+  color: rgba(5, 150, 105, var(--tw-text-opacity));
+}
 .hover\:text-gray-900:hover {
   --tw-text-opacity: 1;
   color: rgba(17, 24, 39, var(--tw-text-opacity));
-}
-.text-hex-4b5563 {
-  --tw-text-opacity: 1;
-  color: rgba(75, 85, 99, var(--tw-text-opacity));
-}
-.text-gray-300 {
-  --tw-text-opacity: 1;
-  color: rgba(209, 213, 219, var(--tw-text-opacity));
 }
 .text-gray-900 {
   --tw-text-opacity: 1;
@@ -728,14 +722,6 @@ textarea::-ms-input-placeholder {
 .dark .dark\:text-white {
   --tw-text-opacity: 1;
   color: rgba(255, 255, 255, var(--tw-text-opacity));
-}
-.text-red-600 {
-  --tw-text-opacity: 1;
-  color: rgba(220, 38, 38, var(--tw-text-opacity));
-}
-.text-green-600 {
-  --tw-text-opacity: 1;
-  color: rgba(5, 150, 105, var(--tw-text-opacity));
 }
 .tracking-widest {
   letter-spacing: 0.1em;

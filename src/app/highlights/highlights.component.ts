@@ -12,7 +12,14 @@ import { DailyPlaysService } from '../daily-plays.service'
 })
 export class HighlightsComponent implements OnInit {
 
-constructor(private service: DailyPlaysService) { }
+constructor(private service: DailyPlaysService) {
+  this.service.period_change.subscribe(period => {
+    // Change Period
+  });
+  this.service.offset_change.subscribe(offset => {
+    // Change Offset
+  });
+ }
 
   ngOnInit(): void {
     this.service.highlights(period, offset);

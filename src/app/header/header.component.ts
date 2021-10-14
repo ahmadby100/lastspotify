@@ -81,6 +81,7 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.changePeriod("month");
   }
 
 }
