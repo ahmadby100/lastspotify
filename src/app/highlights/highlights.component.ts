@@ -16,14 +16,26 @@ export class HighlightsComponent implements OnInit {
   high_offset = offset;
 
   total_scrobbles = {
-    curr: 0,
-    prev: 0,
+    curr: {
+      text: "Scrobbles",
+      plays: 0
+    },
+    prev: {
+      text: "Scrobbles",
+      plays: 0
+    },
     percent: 0,
     dir: "more"
   }
   avg_scrobbles = {
-    curr: 0,
-    prev: 0,
+    curr: {
+      text: "Scrobbles",
+      plays: 0
+    },
+    prev: {
+      text: "Scrobbles",
+      plays: 0
+    },
     percent: 0,
     dir: "more"
   }
@@ -66,11 +78,15 @@ export class HighlightsComponent implements OnInit {
   }
 
   updateHighlights = (highlights: Highlights) => {
+    this.total_scrobbles.curr.plays = 0;
+    this.avg_scrobbles.curr.plays = 0;
+    this.time.curr.text = '0 Days, 0 Hours';
+    this.active.curr.plays = 0;
     // Total Scrobbles
-    this.total_scrobbles.curr = highlights.curr_plays.results[0].plays!;
+    this.total_scrobbles.curr.plays = highlights.curr_plays.results[0].plays!;
 
     // Average Total Scrobbles
-    this.avg_scrobbles.curr = Math.floor(highlights.curr_plays.results[0].avg_plays!);
+    this.avg_scrobbles.curr.plays = Math.floor(highlights.curr_plays.results[0].avg_plays!);
     
     // Total Listening Time
     this.time.curr.hour = parseInt(highlights.curr_time.results[0].time_played!.split(":")[0]);
@@ -85,12 +101,12 @@ export class HighlightsComponent implements OnInit {
 
     if (this.high_period != "all") {
       // Total Scrobbles
-      this.total_scrobbles.prev = highlights.prev_plays!.results[0].plays!;
-      Object.assign(this.total_scrobbles, this.calcPercent(this.total_scrobbles.curr, this.total_scrobbles.prev));
+      this.total_scrobbles.prev.plays = highlights.prev_plays!.results[0].plays!;
+      Object.assign(this.total_scrobbles, this.calcPercent(this.total_scrobbles.curr.plays, this.total_scrobbles.prev.plays));
       
       // Average Total Scrobbles
-      this.avg_scrobbles.prev = Math.floor(highlights.prev_plays!.results[0].avg_plays!);
-      Object.assign(this.avg_scrobbles, this.calcPercent(this.avg_scrobbles.curr, this.avg_scrobbles.prev));     
+      this.avg_scrobbles.prev.plays = Math.floor(highlights.prev_plays!.results[0].avg_plays!);
+      Object.assign(this.avg_scrobbles, this.calcPercent(this.avg_scrobbles.curr.plays, this.avg_scrobbles.prev.plays));     
       
       // Total Listening Time
       this.time.prev.hour = parseInt(highlights.prev_time!.results[0].time_played!.split(":")[0]);
@@ -104,10 +120,13 @@ export class HighlightsComponent implements OnInit {
       this.active.prev.hour = highlights.prev_active!.results[0].hour!;
       this.active.prev.plays = highlights.prev_active!.results[0].plays!;
     }
+    // Dirty way to make ngonchanges trigger
+    this.total_scrobbles = {...this.total_scrobbles};
+    this.avg_scrobbles = {...this.avg_scrobbles};
+    this.time = {...this.time};
+    this.active = {...this.active};
   }
-  calcTime(hours: number) {
-    
-  }
+  
   calcPercent(curr: number, prev: number): {percent: number, dir: string} {
     let p = curr / prev
     let dir: string;

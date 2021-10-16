@@ -11,6 +11,10 @@ import { BarChartComponent } from './bar-chart/bar-chart.component';
 import { TopComponent } from './top/top.component';
 import { HighlightsComponent } from './highlights/highlights.component';
 import { DiscoveriesComponent } from './discoveries/discoveries.component';
+import { TopCardComponent } from './top-card/top-card.component';
+import { NextCardComponent } from './next-card/next-card.component';
+import { SectionTitleComponent } from './section-title/section-title.component';
+import { HighlightsCardComponent } from './highlights-card/highlights-card.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +24,11 @@ import { DiscoveriesComponent } from './discoveries/discoveries.component';
     BarChartComponent,
     TopComponent,
     HighlightsComponent,
-    DiscoveriesComponent
+    DiscoveriesComponent,
+    TopCardComponent,
+    NextCardComponent,
+    SectionTitleComponent,
+    HighlightsCardComponent
   ],
   imports: [
     BrowserModule,

@@ -1,109 +1,34 @@
 <!-- Section 3 -->
-<section class="text-gray-600 body-font max-w-7xl mx-auto text-center">
-  <div class="flex flex-col text-center w-full mb-5 group">
-    <h1 class="sm:text-3xl text-3xl font-medium title-font mb-2 text-gray-900">Top Music</h1>
-    <br>
-    <hr class="w-20 mx-auto border-2 border-blue-400 bg-blue-400 transform transition-all duration-300 ease-in-out group-hover:scale-x-150">
-  </div>
-      <div class="container px-5 pt-14 pb-5 mx-auto text-left">
+<section class="sectionHead text-center">
+  <app-section-title title="Top Music"></app-section-title>
+    <!-- Top -->
+      <div class="container px-5 pt-5 pb-5 mx-auto text-left">
         <div class="flex flex-wrap -m-4">
           <div class="p-4 md:w-1/3">
-            <div class="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden shadow-lg">
-              <img id="top_artist_img" src="{{ top_artist_img }}" class="bg-gray-300 w-full object-cover object-center filter brightness-75" title="Artist"> 
-              <div class="px-6 py-2">
-                <img class="h-6 mr-1 mb-0 inline" src="data:image/svg+xml;base64,PHN2ZyBpZD0iTGF5ZXJfMSIgZW5hYmxlLWJhY2tncm91bmQ9Im5ldyAwIDAgNTA5Ljg4MSA1MDkuODgxIiBoZWlnaHQ9IjUxMiIgdmlld0JveD0iMCAwIDUwOS44ODEgNTA5Ljg4MSIgd2lkdGg9IjUxMiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48Zz48cGF0aCBkPSJtMjExLjA3NyAyMTYuNDQ4aDQ1djMwaC00NXoiIHRyYW5zZm9ybT0ibWF0cml4KC43MDcgLS43MDcgLjcwNyAuNzA3IC05NS4yNDUgMjMyLjk1OCkiLz48cGF0aCBkPSJtMzk5LjA0NSAzNjUuMDk2LTI1LjA0OS0yNS4wNDljLTIxLjI3Ny0yMS4yNzctNTUuODk5LTIxLjI3OS03Ny4xODEgMGwtMTI2LjUwMSAxMjYuNTAxYy0xNy41ODcgMTcuNTg4LTQ2LjA1MSAxNy41ODgtNjMuNjM5IDBsLTIzLjIyOC0yMy4yMjhjLTEwLjY5Ni0xMC42OTYtMTEuMDY2LTI3LjQ5My0xLjczLTM4LjYzNCAxNi42ODQgNy44OTEgMzcuMjc0IDQuOTg2IDUxLjA5Ny04LjgzN2wxMi4zNDgtMTIuMzQ4YzE2Ljg3OCA4LjM1MyAzNy40MjUgNS45MDQgNTEuODQ2LTYuODE5bDE1My43MzItMTM1LjY0NmMyOS4wMjQtMS4yNjggNTYuOS0xMy45NDUgNzkuMDU5LTM2LjEwNSA0Ni43ODgtNDYuNzg4IDQ2Ljc4OC0xMjIuOTE3IDAtMTY5LjcwNi00Ni43ODctNDYuNzg4LTEyMi45MTgtNDYuNzg4LTE2OS43MDUgMC0yMi4xNjIgMjIuMTYzLTM0Ljg0NyA1MC4wNC0zNi4xMTIgNzkuMDY2bC0xMzUuNjU1IDE1My43NDNjLTEyLjg4NCAxNC42MDItMTUuMDQ0IDM1LjIxNS02LjgxMiA1MS44MzZsLTEyLjM0MSAxMi4zNDFjLTEzLjg0MyAxMy44NDUtMTYuNzU0IDM0LjUzNS04Ljc1MSA1MS4yNy0yMS4wNjMgMjIuOTkxLTIwLjUyNSA1OC43MTcgMS44MTIgODEuMDU0bDIzLjIyNyAyMy4yMjhjMjkuMzEgMjkuMzExIDc2Ljc1MyAyOS4zMTYgMTA2LjA2NiAwbDEyNi41LTEyNi41MDNjOS41ODEtOS41ODIgMjUuMTcyLTkuNTgyIDM0Ljc1NSAwbDI1LjA0OSAyNS4wNDl6bS0yODcuNDQzIDkuNTQxYy01Ljg0OSA1Ljg0OC0xNS4zNjUgNS44NDgtMjEuMjE0IDAtNS44NDktNS44NDktNS44NDktMTUuMzY1IDAtMjEuMjE0bDEwLjYwNy0xMC42MDYgMjEuMjEzIDIxLjIxNHptMjg1LjU4OS0xODEuMWMtMTMuOTc3IDEwLjM2My0yOS44NjggMTYuNDEtNDYuMTg5IDE3LjQ1MWwtOTYuOTY0LTk2Ljk2NWMxLjA0MS0xNi4zMTkgNy4wODgtMzIuMjExIDE3LjQ1MS00Ni4xODl6bTExLjM5NS0xMzcuMDk4YzMxLjQ3NyAzMS40NzYgMzQuNjk3IDgwLjY0OCA5LjcwNiAxMTUuNzcybC0xMjUuNDc4LTEyNS40NzhjMzUuMTI0LTI0Ljk5MSA4NC4yOTQtMjEuNzcgMTE1Ljc3MiA5LjcwNnptLTI5Ny43NjQgMjMxLjQ0MyAxMjguNzQyLTE0NS45MDcgODMuNDg2IDgzLjQ4NS0xNDUuODkxIDEyOC43MjhjLTYuNjYyIDUuODgtMTYuODA0IDUuNTYzLTIzLjA4OC0uNzIxbC00Mi41MjktNDIuNTI5Yy02LjI3NC02LjI3NC02LjU5MS0xNi40MDEtLjcyLTIzLjA1NnoiLz48cGF0aCBkPSJtOTAgMTQ4LjgzOHYtNzAuNTQybDM4LjE4MyAxMC4wNDggNy42MzUtMjkuMDEyLTc1LjgxOC0xOS45NTJ2NjcuMDM4Yy0yOS4yMzctMTAuMzctNjAgMTEuNDU3LTYwIDQyLjQyIDAgMjQuODEzIDIwLjE4NyA0NSA0NSA0NXM0NS0yMC4xODcgNDUtNDV6bS00NSAxNWMtOC4yNzEgMC0xNS02LjcyOS0xNS0xNXM2LjcyOS0xNSAxNS0xNSAxNSA2LjcyOSAxNSAxNS02LjcyOSAxNS0xNSAxNXoiLz48cGF0aCBkPSJtNDM1IDMzOS4yOTF2ODIuMTI3Yy0yOS4yMzctMTAuMzY5LTYwIDExLjQ1Ni02MCA0Mi40MiAwIDI0LjgxNCAyMC4xODYgNDUgNDUgNDUgMjQuODEzIDAgNDUtMjAuMTg2IDQ1LTQ1di04NS40NTNsMzcuMTE5IDkuOTQyIDcuNzYyLTI4Ljk3OXptLTE1IDEzOS41NDdjLTguMjcyIDAtMTUtNi43MjgtMTUtMTUgMC04LjI3MSA2LjcyOC0xNSAxNS0xNSA4LjI3MSAwIDE1IDYuNzI5IDE1IDE1cy02LjcyOSAxNS0xNSAxNXoiLz48L2c+PC9zdmc+" />
-                <h2 class="tracking-widest text-xs title-font font-medium mb-1 text-yellow-600 inline">TOP ARTIST</h2>
-                <h1 class="title-font text-md font-semibold text-gray-900 mb-0.5 mt-1.5" id="top_artist">{{ top_artist }} </h1>
-                <h1 class="title text-xs font-bold text-gray-600 mb-0.5">&zwnj;</h1>
-                <div class="flex items-center flex-wrap">
-                    <span class="text-gray-400 mr-0 mt-4 inline-flex items-start lg:ml-auto md:ml-0 ml-auto leading-none text-sm pr-0 py-1 pb-1">
-                      <img class="w-3 h-3 mr-1" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHhtbG5zOnN2Z2pzPSJodHRwOi8vc3ZnanMuY29tL3N2Z2pzIiB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiIgeD0iMCIgeT0iMCIgdmlld0JveD0iMCAwIDUxMS45OTkgNTExLjk5OSIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgNTEyIDUxMiIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSIgY2xhc3M9IiI+PGc+CjxnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+Cgk8Zz4KCQk8cGF0aCBkPSJNNDQzLjg2LDE5Ni45MTlMMTQxLjQ2LDEwLjUxNEMxMTkuNTgyLTIuOTU1LDkzLjEzMS0zLjUxNSw3MC43MDIsOS4wMTZjLTIyLjQyOSwxMi41MjktMzUuODE5LDM1LjM1LTM1LjgxOSw2MS4wNDEgICAgdjM3MS4xMTJjMCwzOC44NDYsMzEuMyw3MC42MTksNjkuNzcsNzAuODI5YzAuMTA1LDAsMC4yMSwwLjAwMSwwLjMxMywwLjAwMWMxMi4wMjItMC4wMDEsMjQuNTUtMy43NjksMzYuMjUxLTEwLjkwOSAgICBjOS40MTMtNS43NDMsMTIuMzg4LTE4LjAyOSw2LjY0NS0yNy40NDFjLTUuNzQzLTkuNDE0LTE4LjAzMS0xMi4zODgtMjcuNDQxLTYuNjQ1Yy01LjQ3MywzLjMzOC0xMC44MTgsNS4wNjUtMTUuNTUzLDUuMDY0ICAgIGMtMTQuNTE1LTAuMDc5LTMwLjA1Ni0xMi41MTMtMzAuMDU2LTMwLjg5OFY3MC4wNThjMC0xMS4wMjEsNS43NDQtMjAuODA4LDE1LjM2NC0yNi4xODNjOS42MjEtNS4zNzUsMjAuOTY2LTUuMTM1LDMwLjMzOSwwLjYzNiAgICBsMzAyLjQwMSwxODYuNDA1YzkuMDg5LDUuNTk2LDE0LjI5LDE0LjkyNywxNC4yNjgsMjUuNjAxYy0wLjAyMiwxMC42NzMtNS4yNjEsMTkuOTgzLTE0LjQsMjUuNTZMMjA0LjE0Nyw0MTUuOTQ1ICAgIGMtOS40MDQsNS43NTgtMTIuMzYsMTguMDQ5LTYuNjAyLDI3LjQ1MmM1Ljc1Nyw5LjQwNCwxOC4wNDgsMTIuMzYsMjcuNDUyLDYuNjAybDIxOC42MTEtMTMzLjg1MiAgICBjMjAuOTMxLTEyLjc2OSwzMy40NTctMzUuMDI5LDMzLjUwNy01OS41NUM0NzcuMTY1LDIzMi4wNzksNDY0LjcyOSwyMDkuNzY3LDQ0My44NiwxOTYuOTE5eiIgZmlsbD0iIzhjOGM4YyIgZGF0YS1vcmlnaW5hbD0iIzAwMDAwMCIgc3R5bGU9IiIgY2xhc3M9IiI+PC9wYXRoPgoJPC9nPgo8L2c+CjxnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjwvZz4KPGcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPC9nPgo8ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8L2c+CjxnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjwvZz4KPGcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPC9nPgo8ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8L2c+CjxnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjwvZz4KPGcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPC9nPgo8ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8L2c+CjxnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjwvZz4KPGcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPC9nPgo8ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8L2c+CjxnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjwvZz4KPGcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPC9nPgo8ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8L2c+CjwvZz48L3N2Zz4=" />
-                      <span id="top_artist_plays"> {{ top_artist_plays }} plays</span>
-                  </span>
-                </div>
-              </div>
-            </div>
+            <app-top-card type="ARTIST" [top_type_img]="top_artist_img" [top_type_name]="top_artist" [top_type_plays]="top_artist_plays" ></app-top-card>
           </div>
           <div class="p-4 md:w-1/3">
-            <div class="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden shadow-lg">
-              <img id="top_album_img" src="{{ top_album_img }}" class="bg-gray-300 w-full object-cover object-center filter brightness-75" title="Album">
-              <div class="px-6 py-2">
-                <img class="h-6 mr-1 mb-0 inline" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pg0KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDE5LjAuMCwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPg0KPHN2ZyB2ZXJzaW9uPSIxLjEiIGlkPSJDYXBhXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4Ig0KCSB2aWV3Qm94PSIwIDAgMzg5LjEyIDM4OS4xMiIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgMzg5LjEyIDM4OS4xMjsiIHhtbDpzcGFjZT0icHJlc2VydmUiPg0KPGc+DQoJPGc+DQoJCTxnPg0KCQkJPHBhdGggZD0iTTE5NC41NiwwQzg3LjI4MSwwLDAsODcuMjgxLDAsMTk0LjU2czg3LjI4MSwxOTQuNTYsMTk0LjU2LDE5NC41NnMxOTQuNTYtODcuMjgxLDE5NC41Ni0xOTQuNTZTMzAxLjgzOSwwLDE5NC41Niwweg0KCQkJCSBNMTk0LjU2LDM3NS40NjdjLTk5Ljc1MywwLTE4MC45MDctODEuMTU0LTE4MC45MDctMTgwLjkwN1M5NC44MDcsMTMuNjUzLDE5NC41NiwxMy42NTNTMzc1LjQ2Nyw5NC44MDcsMzc1LjQ2NywxOTQuNTYNCgkJCQlTMjk0LjMxMywzNzUuNDY3LDE5NC41NiwzNzUuNDY3eiIvPg0KCQkJPHBhdGggZD0iTTE5NC41NiwxNTAuMTg3Yy0yNC40NjcsMC00NC4zNzMsMTkuOTA3LTQ0LjM3Myw0NC4zNzNjMCwyNC40NjcsMTkuOTA3LDQ0LjM3Myw0NC4zNzMsNDQuMzczDQoJCQkJYzI0LjQ2NywwLDQ0LjM3My0xOS45MDcsNDQuMzczLTQ0LjM3M0MyMzguOTMzLDE3MC4wOTMsMjE5LjAyNywxNTAuMTg3LDE5NC41NiwxNTAuMTg3eiBNMTk0LjU2LDIyNS4yOA0KCQkJCWMtMTYuOTQsMC0zMC43Mi0xMy43OC0zMC43Mi0zMC43MnMxMy43OC0zMC43MiwzMC43Mi0zMC43MnMzMC43MiwxMy43OCwzMC43MiwzMC43MlMyMTEuNSwyMjUuMjgsMTk0LjU2LDIyNS4yOHoiLz4NCgkJPC9nPg0KCTwvZz4NCjwvZz4NCjxnPg0KCTxnPg0KCQk8Zz4NCgkJCTxwYXRoIGQ9Ik0xOTQuNTYsMTIyLjg4Yy0zOS41MjYsMC03MS42OCwzMi4xNTQtNzEuNjgsNzEuNjhzMzIuMTU0LDcxLjY4LDcxLjY4LDcxLjY4czcxLjY4LTMyLjE1NCw3MS42OC03MS42OA0KCQkJCVMyMzQuMDg2LDEyMi44OCwxOTQuNTYsMTIyLjg4eiBNMTk0LjU2LDI1Mi41ODdjLTMxLjk5MywwLTU4LjAyNy0yNi4wMzQtNTguMDI3LTU4LjAyN3MyNi4wMzQtNTguMDI3LDU4LjAyNy01OC4wMjcNCgkJCQlzNTguMDI3LDI2LjAzNCw1OC4wMjcsNTguMDI3UzIyNi41NTMsMjUyLjU4NywxOTQuNTYsMjUyLjU4N3oiLz4NCgkJCTxwYXRoIGQ9Ik0xOTQuNTYsMTUwLjE4N2MtMjQuNDY3LDAtNDQuMzczLDE5LjkwNy00NC4zNzMsNDQuMzczYzAsMjQuNDY3LDE5LjkwNyw0NC4zNzMsNDQuMzczLDQ0LjM3Mw0KCQkJCWMyNC40NjcsMCw0NC4zNzMtMTkuOTA3LDQ0LjM3My00NC4zNzNDMjM4LjkzMywxNzAuMDkzLDIxOS4wMjcsMTUwLjE4NywxOTQuNTYsMTUwLjE4N3ogTTE5NC41NiwyMjUuMjgNCgkJCQljLTE2Ljk0LDAtMzAuNzItMTMuNzgtMzAuNzItMzAuNzJzMTMuNzgtMzAuNzIsMzAuNzItMzAuNzJzMzAuNzIsMTMuNzgsMzAuNzIsMzAuNzJTMjExLjUsMjI1LjI4LDE5NC41NiwyMjUuMjh6Ii8+DQoJCTwvZz4NCgk8L2c+DQo8L2c+DQo8Zz4NCgk8Zz4NCgkJPHBhdGggZD0iTTEyMC4zMDUsNTguNTA4Yy0xLjkzMi0zLjI0MS02LjEyLTQuMzA4LTkuMzU5LTIuMzc0Qzc2LjU1OSw3Ni42MDcsNTEuNDk0LDEwOC45NDcsNDAuMzY2LDE0Ny4yDQoJCQljLTEuMDUzLDMuNjIsMS4wMjcsNy40MDcsNC42NDcsOC40NmMwLjYzMywwLjE4NiwxLjI4LDAuMjczLDEuOTA2LDAuMjczYzIuOTYxLDAsNS42ODctMS45MzQsNi41NS00LjkxOQ0KCQkJYzEwLjE2MS0zNC45MiwzMy4wNTUtNjQuNDU0LDY0LjQ2MS04My4xNDdDMTIxLjE3Miw2NS45NCwxMjIuMjMxLDYxLjc0NywxMjAuMzA1LDU4LjUwOHoiLz4NCgk8L2c+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8L3N2Zz4NCg==" />
-                <h2 class="tracking-widest text-xs title-font font-medium mb-1 text-green-700 inline">TOP ALBUM</h2>
-                <h1 class="title-font text-md font-semibold text-gray-900 mb-0.5 mt-1.5" id="top_album">{{ top_album }}</h1>
-                <h1 class="title text-xs font-bold text-gray-600 mb-0.5" id="top_album_artist"> {{ top_album_artist}} </h1>
-                
-                <div class="flex items-center flex-wrap">
-                    <span class="text-gray-400 mr-0 mt-4 inline-flex items-start lg:ml-auto md:ml-0 ml-auto leading-none text-sm pr-0 py-1 pb-1">
-                      <img class="w-3 h-3 mr-1" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHhtbG5zOnN2Z2pzPSJodHRwOi8vc3ZnanMuY29tL3N2Z2pzIiB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiIgeD0iMCIgeT0iMCIgdmlld0JveD0iMCAwIDUxMS45OTkgNTExLjk5OSIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgNTEyIDUxMiIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSIgY2xhc3M9IiI+PGc+CjxnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+Cgk8Zz4KCQk8cGF0aCBkPSJNNDQzLjg2LDE5Ni45MTlMMTQxLjQ2LDEwLjUxNEMxMTkuNTgyLTIuOTU1LDkzLjEzMS0zLjUxNSw3MC43MDIsOS4wMTZjLTIyLjQyOSwxMi41MjktMzUuODE5LDM1LjM1LTM1LjgxOSw2MS4wNDEgICAgdjM3MS4xMTJjMCwzOC44NDYsMzEuMyw3MC42MTksNjkuNzcsNzAuODI5YzAuMTA1LDAsMC4yMSwwLjAwMSwwLjMxMywwLjAwMWMxMi4wMjItMC4wMDEsMjQuNTUtMy43NjksMzYuMjUxLTEwLjkwOSAgICBjOS40MTMtNS43NDMsMTIuMzg4LTE4LjAyOSw2LjY0NS0yNy40NDFjLTUuNzQzLTkuNDE0LTE4LjAzMS0xMi4zODgtMjcuNDQxLTYuNjQ1Yy01LjQ3MywzLjMzOC0xMC44MTgsNS4wNjUtMTUuNTUzLDUuMDY0ICAgIGMtMTQuNTE1LTAuMDc5LTMwLjA1Ni0xMi41MTMtMzAuMDU2LTMwLjg5OFY3MC4wNThjMC0xMS4wMjEsNS43NDQtMjAuODA4LDE1LjM2NC0yNi4xODNjOS42MjEtNS4zNzUsMjAuOTY2LTUuMTM1LDMwLjMzOSwwLjYzNiAgICBsMzAyLjQwMSwxODYuNDA1YzkuMDg5LDUuNTk2LDE0LjI5LDE0LjkyNywxNC4yNjgsMjUuNjAxYy0wLjAyMiwxMC42NzMtNS4yNjEsMTkuOTgzLTE0LjQsMjUuNTZMMjA0LjE0Nyw0MTUuOTQ1ICAgIGMtOS40MDQsNS43NTgtMTIuMzYsMTguMDQ5LTYuNjAyLDI3LjQ1MmM1Ljc1Nyw5LjQwNCwxOC4wNDgsMTIuMzYsMjcuNDUyLDYuNjAybDIxOC42MTEtMTMzLjg1MiAgICBjMjAuOTMxLTEyLjc2OSwzMy40NTctMzUuMDI5LDMzLjUwNy01OS41NUM0NzcuMTY1LDIzMi4wNzksNDY0LjcyOSwyMDkuNzY3LDQ0My44NiwxOTYuOTE5eiIgZmlsbD0iIzhjOGM4YyIgZGF0YS1vcmlnaW5hbD0iIzAwMDAwMCIgc3R5bGU9IiIgY2xhc3M9IiI+PC9wYXRoPgoJPC9nPgo8L2c+CjxnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjwvZz4KPGcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPC9nPgo8ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8L2c+CjxnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjwvZz4KPGcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPC9nPgo8ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8L2c+CjxnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjwvZz4KPGcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPC9nPgo8ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8L2c+CjxnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjwvZz4KPGcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPC9nPgo8ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8L2c+CjxnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjwvZz4KPGcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPC9nPgo8ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8L2c+CjwvZz48L3N2Zz4=" />
-                      <span id="top_album_plays">{{ top_album_plays }} plays</span>
-                  </span>
-              </div>
-              </div>
-            </div>
+            <app-top-card type="ALBUM" [top_type_img]="top_album_img" [top_type_name]="top_album" [top_type_plays]="top_album_plays" ></app-top-card>
           </div>
           <div class="p-4 md:w-1/3">
-            <div class="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden shadow-lg">
-              <img id="top_track_img" src="{{ top_track_img }}" class="bg-gray-300 w-full object-cover object-center filter brightness-75" title="Tracks">
-           <div class="px-6 py-2">
-                <img class="h-6 mr-1 inline" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pg0KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDE5LjAuMCwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPg0KPHN2ZyB2ZXJzaW9uPSIxLjEiIGlkPSJDYXBhXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4Ig0KCSB2aWV3Qm94PSIwIDAgNTEyIDUxMiIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgNTEyIDUxMjsiIHhtbDpzcGFjZT0icHJlc2VydmUiPg0KPGc+DQoJPGc+DQoJCTxwYXRoIGQ9Ik0yMDkuMjk3LDEwNi40N2MtMjcuMDQxLTE5LjgxOS01NC43ODUtNDQuMjQ2LTc0LjUzMS03My44NjVMMTE3LjQ4LDYuNjc3Yy0zLjY2Mi01LjQ5My0xMC40ODgtNy45MzktMTYuODMxLTYuMDM1DQoJCQlDOTQuMzIxLDIuNTYxLDkwLDguMzkxLDkwLDE0Ljk5OHYyMzUuMzQ0Yy04Ljg2LTUuMTY3LTE5LjAyMy04LjM0NC0zMC04LjM0NGMtMzMuMDkxLDAtNjAsMjYuOTA5LTYwLDYwDQoJCQljMCwzMy4wOTEsMjYuOTA5LDU5Ljk5OSw2MCw1OS45OTlzNjAtMjYuOTA5LDYwLTYwVjY0LjI0OWMyMS4xOTYsMjYuNzkyLDQ3LjcxLDQ4LjkzLDcxLjU1OCw2Ni40Mg0KCQkJQzIwMy4yNzYsMTM5LjI1MywyMTAsMTUyLjQ5NiwyMTAsMTY2Ljk5N2MwLDI0LjgxNC0yMC4xODYsNDUtNDUsNDVjLTguMjkxLDAtMTUsNi43MDktMTUsMTVjMCw4LjI5MSw2LjcwOSwxNSwxNSwxNQ0KCQkJYzQxLjM1MywwLDc1LTMzLjY0Nyw3NS03NUMyNDAsMTQzLjE5MywyMjguNTMsMTIwLjU3NiwyMDkuMjk3LDEwNi40N3oiLz4NCgk8L2c+DQo8L2c+DQo8Zz4NCgk8Zz4NCgkJPHBhdGggZD0iTTQ5Mi44ODQsMTIyLjU2OWwtMjEyLDYwYy02LjQ0NSwxLjg0Ni0xMC44ODQsNy43MzQtMTAuODg0LDE0LjQyOXYyMDMuMzQ0Yy04Ljg2LTUuMTY3LTE5LjAyMy04LjM0NC0zMC04LjM0NA0KCQkJYy0zMy4wOTEsMC02MCwyNi45MDktNjAsNjBzMjYuOTA5LDYwLDYwLDYwczYwLTI2LjkwOSw2MC02MGMwLTMuNDIsMC0xODMuNjgsMC0xODMuNjhsMTgyLTUxLjQyOXYxMjMuNDUzDQoJCQljLTguODYtNS4xNjctMTkuMDIzLTguMzQ0LTMwLTguMzQ0Yy0zMy4wOTEsMC02MCwyNi45MDktNjAsNjBzMjYuOTA5LDYwLDYwLDYwczYwLTI2LjkwOSw2MC02MGMwLTMuNDIsMC0yNTUsMC0yNTUNCgkJCUM1MTIsMTI3LjA3Nyw1MDIuNTEsMTE5Ljg1LDQ5Mi44ODQsMTIyLjU2OXoiLz4NCgk8L2c+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8L3N2Zz4NCg==" />
-                <h2 class="tracking-widest text-xs title-font font-medium text-blue-600 mb-1 inline">TOP TRACK</h2>
-                <h1 class="title-font text-md font-semibold text-gray-900 mb-0.5 mt-1.5" id="top_track">{{ top_track }}</h1>
-                <h1 class="title text-xs font-bold text-gray-600 mb-0.5" id="top_track_artist"> {{ top_track_artist }} </h1>
-                
-                <div class="flex items-center flex-wrap">
-                  <span class="text-gray-400 mr-0 mt-4 inline-flex items-start lg:ml-auto md:ml-0 ml-auto leading-none text-sm pr-0 py-1 pb-1">
-                    <img class="w-3 h-3 mr-1" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHhtbG5zOnN2Z2pzPSJodHRwOi8vc3ZnanMuY29tL3N2Z2pzIiB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiIgeD0iMCIgeT0iMCIgdmlld0JveD0iMCAwIDUxMS45OTkgNTExLjk5OSIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgNTEyIDUxMiIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSIgY2xhc3M9IiI+PGc+CjxnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+Cgk8Zz4KCQk8cGF0aCBkPSJNNDQzLjg2LDE5Ni45MTlMMTQxLjQ2LDEwLjUxNEMxMTkuNTgyLTIuOTU1LDkzLjEzMS0zLjUxNSw3MC43MDIsOS4wMTZjLTIyLjQyOSwxMi41MjktMzUuODE5LDM1LjM1LTM1LjgxOSw2MS4wNDEgICAgdjM3MS4xMTJjMCwzOC44NDYsMzEuMyw3MC42MTksNjkuNzcsNzAuODI5YzAuMTA1LDAsMC4yMSwwLjAwMSwwLjMxMywwLjAwMWMxMi4wMjItMC4wMDEsMjQuNTUtMy43NjksMzYuMjUxLTEwLjkwOSAgICBjOS40MTMtNS43NDMsMTIuMzg4LTE4LjAyOSw2LjY0NS0yNy40NDFjLTUuNzQzLTkuNDE0LTE4LjAzMS0xMi4zODgtMjcuNDQxLTYuNjQ1Yy01LjQ3MywzLjMzOC0xMC44MTgsNS4wNjUtMTUuNTUzLDUuMDY0ICAgIGMtMTQuNTE1LTAuMDc5LTMwLjA1Ni0xMi41MTMtMzAuMDU2LTMwLjg5OFY3MC4wNThjMC0xMS4wMjEsNS43NDQtMjAuODA4LDE1LjM2NC0yNi4xODNjOS42MjEtNS4zNzUsMjAuOTY2LTUuMTM1LDMwLjMzOSwwLjYzNiAgICBsMzAyLjQwMSwxODYuNDA1YzkuMDg5LDUuNTk2LDE0LjI5LDE0LjkyNywxNC4yNjgsMjUuNjAxYy0wLjAyMiwxMC42NzMtNS4yNjEsMTkuOTgzLTE0LjQsMjUuNTZMMjA0LjE0Nyw0MTUuOTQ1ICAgIGMtOS40MDQsNS43NTgtMTIuMzYsMTguMDQ5LTYuNjAyLDI3LjQ1MmM1Ljc1Nyw5LjQwNCwxOC4wNDgsMTIuMzYsMjcuNDUyLDYuNjAybDIxOC42MTEtMTMzLjg1MiAgICBjMjAuOTMxLTEyLjc2OSwzMy40NTctMzUuMDI5LDMzLjUwNy01OS41NUM0NzcuMTY1LDIzMi4wNzksNDY0LjcyOSwyMDkuNzY3LDQ0My44NiwxOTYuOTE5eiIgZmlsbD0iIzhjOGM4YyIgZGF0YS1vcmlnaW5hbD0iIzAwMDAwMCIgc3R5bGU9IiIgY2xhc3M9IiI+PC9wYXRoPgoJPC9nPgo8L2c+CjxnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjwvZz4KPGcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPC9nPgo8ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8L2c+CjxnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjwvZz4KPGcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPC9nPgo8ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8L2c+CjxnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjwvZz4KPGcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPC9nPgo8ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8L2c+CjxnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjwvZz4KPGcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPC9nPgo8ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8L2c+CjxnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjwvZz4KPGcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPC9nPgo8ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8L2c+CjwvZz48L3N2Zz4=" />
-                    <span id="top_track_plays">{{ top_track_plays }} plays</span>
-                </span>
-                </div>
-              </div>
-            </div>
+            <app-top-card type="TRACK" [top_type_img]="top_track_img" [top_type_name]="top_track" [top_type_plays]="top_track_plays" ></app-top-card>
           </div>
         </div>
+        <!-- 2 - 5 -->
         <div class="flex flex-wrap -m-4">
           <div class="p-4 w-full md:w-1/3" >
-            <!-- Artist -->
             <span *ngFor="let artist of this.next.artist; let i = index">
-              <div class="flex border-2 rounded-lg border-gray-200 border-opacity-50 p-4 sm:flex-row flex-col mb-3 items-center justify-center">
-                <span class="inline-flex pr-3 text-sm font-medium">{{ i + 2 }}</span>
-                <div class="w-16 h-16 sm:mr-8 sm:mb-0 mb-4 inline-flex rounded-md bg-gray-300 text-purple-500 flex-shrink-0">
-                  <img src="{{ artist.img }}" alt="" class="rounded-md"  >
-                </div>
-                <div class="flex-grow">
-                  <h2 class="text-gray-900 text-sm font-semibold mb-2"> {{ artist.artist }} </h2>
-                </div>
-              </div>
+              <app-next-card type="artist" [data]="artist" [index]="i" ></app-next-card>
             </span>
           </div>
           <div class="p-4 w-full md:w-1/3">
-            <!-- Album -->
             <span *ngFor="let album of this.next.album; let i = index">
-              <div class="flex border-2 rounded-lg border-gray-200 border-opacity-50 p-4 sm:flex-row flex-col mb-3 items-center justify-center">
-                <span class="inline-flex pr-3 text-sm font-medium">{{ i + 2 }}</span>
-                <div class="w-16 h-16 sm:mr-8 sm:mb-0 mb-4 inline-flex rounded-md bg-gray-300 text-purple-500 flex-shrink-0">
-                  <img src="{{ album.img }}" alt="" class="rounded-md">
-                </div>
-                <div class="flex-grow">
-                  <h2 class="text-gray-900 text-sm font-semibold mb-2">{{ album.title }}</h2>
-                  <p class="leading-none text-xs font-bold" id="2_album_artist">{{ album.artist }}</p>
-                </div>
-              </div>
+              <app-next-card type="album" [data]="album" [index]="i" ></app-next-card>
             </span>
           </div>
           <div class="p-4 w-full md:w-1/3">
-            <!-- Track -->
             <span *ngFor="let track of this.next.track; let i = index">
-              <div class="flex border-2 rounded-lg border-gray-200 border-opacity-50 p-4 sm:flex-row flex-col mb-3 items-center justify-center">
-                <span class="inline-flex pr-3 text-sm font-medium">{{ i + 2 }}</span>
-                <div class="w-16 h-16 sm:mr-8 sm:mb-0 mb-4 inline-flex rounded-md bg-gray-300 text-purple-500 flex-shrink-0">
-                  <img src="{{ track.img }}" alt="" class="rounded-md">
-                </div>
-                <div class="flex-grow">
-                  <h2 class="text-gray-900 text-sm font-semibold mb-2">{{ track.title }}</h2>
-                  <p class="leading-none text-xs font-bold">{{ track.artist }} </p>
-                </div>
-              </div>
+              <app-next-card type="track" [data]="track" [index]="i" ></app-next-card>
             </span>
           </div>
         </div>

@@ -145,3 +145,17 @@ export interface Discoveries {
         prev?: DBResponse
     }
 }
+export interface HighlightsCard {
+    curr: {
+        hour?: number,
+        text?: string,
+        plays?: number
+      },
+      prev: {
+        hour?: number,
+        text?: string,
+        plays?: number
+      },
+      percent: number,
+      dir: string
+}
