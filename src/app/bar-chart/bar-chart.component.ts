@@ -47,14 +47,6 @@ export class BarChartComponent implements OnInit {
       title: {
         display: false,
         text: ["Listening Week [Scrobbles]"]
-      },
-      scales: {
-        y: {
-          
-          type: "linear",
-          display: false,
-          position: "right"
-        }
       }
     }
   }

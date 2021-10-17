@@ -1,37 +1,33 @@
 import { Injectable } from '@angular/core';
-import { gOffset, ROOT_URL, getDate, period, offset } from "./global";
+import { gOffset, ROOT_URL, getDate, logger } from "./global";
 import * as $ from 'jquery';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 
-import { DBResponse, Discoveries, Highlights, Single, Top } from "./types";
+import { DBResponse, Discoveries, Highlights } from "./types";
 import { Observable, of, Subject } from 'rxjs';
+
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class DailyPlaysService {
-	constructor(private http: HttpClient) {}	
-	
+	constructor(private http: HttpClient) {}
+
 	public get getPeriod() : string {
 		return this.local_period;
 	}
 	public get getOffset() : number {
 		return this.local_offset;
 	}
-	
+
 	period_change: Subject<string> = new Subject<string>();
 	offset_change: Subject<number> = new Subject<number>();
-	
+
 	curr_date: Subject<string> = new Subject<string>();
-	
+
 	local_period: string = "week";
 	local_offset: number = 1;
-	
-	private css = "color: lightblue;";
-	private logservice = (log: any) => {
-		console.log(`%cService: ${log}`, this.css);	
-	}
 
 	// Component Functions
 	daily_plays = (period: string, offset: number): Observable<{curr: Object, prev: Object}> => {
@@ -168,7 +164,7 @@ export class DailyPlaysService {
 		const curr_plays = await this.http.get<DBResponse>(`${ROOT_URL}/plays/${period}/${offset}`).toPromise();
 		const curr_time = await this.http.get<DBResponse>(`${ROOT_URL}/duration/${period}/${offset}`).toPromise();
 		const curr_active = await this.http.get<DBResponse>(`${ROOT_URL}/activehour/${period}/${offset}`).toPromise();
-		
+
 		if (this.local_period != "all") {
 			const prev_plays = await this.http.get<DBResponse>(`${ROOT_URL}/plays/${period}/${offset + 1}`).toPromise();
 			const prev_time = await this.http.get<DBResponse>(`${ROOT_URL}/duration/${period}/${offset +  1}`).toPromise();
@@ -194,17 +190,17 @@ export class DailyPlaysService {
 		const curr_tracks = await this.http.get<DBResponse>(`${ROOT_URL}/new/track/${period}/${offset}`).toPromise();
 		const curr_albums = await this.http.get<DBResponse>(`${ROOT_URL}/new/album/${period}/${offset}`).toPromise();
 		const curr_artists = await this.http.get<DBResponse>(`${ROOT_URL}/new/artist/${period}/${offset}`).toPromise();
-		
+
 		const curr_track_plays = await this.http.get<DBResponse>(`${ROOT_URL}/totalnew/track/${period}/${offset}`).toPromise();
 		const curr_album_plays = await this.http.get<DBResponse>(`${ROOT_URL}/totalnew/album/${period}/${offset}`).toPromise();
 		const curr_artist_plays = await this.http.get<DBResponse>(`${ROOT_URL}/totalnew/artist/${period}/${offset}`).toPromise();
-		
+
 
 		if (this.local_period != "all") {
 			const prev_track_plays = await this.http.get<DBResponse>(`${ROOT_URL}/totalnew/track/${period}/${offset + 1}`).toPromise();
 			const prev_album_plays = await this.http.get<DBResponse>(`${ROOT_URL}/totalnew/album/${period}/${offset + 1}`).toPromise();
 			const prev_artist_plays = await this.http.get<DBResponse>(`${ROOT_URL}/totalnew/artist/${period}/${offset + 1}`).toPromise();
-			
+
 			return {
 					track: {
 						plays: curr_track_plays,
@@ -243,20 +239,20 @@ export class DailyPlaysService {
 	alertChanges(type: string) {
 		if (type == "period")
 			this.period_change.next(this.local_period);
-		if (type == "offset") 
+		if (type == "offset")
 			this.offset_change.next(this.local_offset);
-		
+
 	}
 	updateSettings(period: string, offset: number) {
-		this.logservice(`Received Settings {"period": ${period}, "offset": ${offset}} from header`);
+		logger("Service [Main]", `Received Settings {"period": ${period}, "offset": ${offset}}`, "lightblue");
 		if (this.local_period != period) {
 			this.local_period = period;
-			this.logservice(`Period Changed to "${this.local_period}"`);
+			logger("Service [Main]", `Period Changed to "${this.local_period}"`, "lightblue");
 			this.alertChanges("period")
 		}
 		if (this.local_offset != offset) {
 			this.local_offset = offset;
-			this.logservice(`Offset Changed to "${this.local_offset}" in service`);
+			logger("Service [Main]", `Offset Changed to "${this.local_offset}" in service`, "lightblue");
 			this.alertChanges("offset");
 		}
 	};

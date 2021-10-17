@@ -1,3 +1,5 @@
+import { environment } from "src/environments/environment";
+
 // Variables
 export let gOffset = 1;
 export let offset: number = 1;
@@ -13,4 +15,10 @@ export const getDate = (date: string): string => {
     let month = monthNames[parseInt(date.substr(5, 2)) - 2];
     let year = date.substr(0, 4);
     return `${day} ${month} ${year}`;
+}
+
+export const logger = (loc: string, log: string, color: string): void => {
+  // console.log(logger.caller);
+  let css = `color: ${color}`;
+  if (!environment.production) console.log(`%c${loc}: ${log}`, css);
 }

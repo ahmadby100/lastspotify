@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { period, offset } from "../global";
+import { period, offset, logger } from "../global";
 import { Subject } from 'rxjs';
 import { DailyPlaysService } from '../daily-plays.service';
 
@@ -17,14 +17,10 @@ export class HeaderComponent implements OnInit {
   curr_date = "";
   prevBtn = false;
   nextBtn = true;
-  private css = "color: lightcoral;";
-  private logheader = (log: any) => {
-		console.log(`%cHeader: ${log}`, this.css);	
-	}
   sub: any;
   periodChange: Subject<string> = new Subject<string>();
   offsetChange: Subject<number> = new Subject<number>();
-  
+
   constructor(private service: DailyPlaysService) {
     this.service.curr_date.subscribe(date => this.curr_date = date);
   }
@@ -32,11 +28,9 @@ export class HeaderComponent implements OnInit {
   get getPeriod(): string {
     return this.service.local_period;
   }
-  
-  
 
   changePeriod = (newPeriod: string) => {
-    this.logheader(`Setting Period: ${newPeriod}`);
+    logger("Header",`Setting Period: ${newPeriod}`, "#28B463");
     this.period = newPeriod;
     this.offset = 1;
     this.disableButtons();
@@ -58,7 +52,7 @@ export class HeaderComponent implements OnInit {
     }
     (direction == 'prev') ? this.offset++ : this.offset--;
     this.disableButtons();
-    this.logheader(`Setting Offset: ${this.offset}`);
+    logger("Header", `Setting Offset: ${this.offset}`, "lightblue");
     this.service.updateSettings(this.period, this.offset);
   }
 

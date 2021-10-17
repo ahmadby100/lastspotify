@@ -1,0 +1,19 @@
+<!-- <div class="absolute bg-black opacity-80 inset-0 z-0"></div> -->
+<div class="absolute top-1/2 left-1/2" *ngIf="!hidden">
+  <div
+    class="w-xs hover:w-full h-3/5 p-5 mx-auto my-auto relative -left-1/2 rounded-xl shadow-lg bg-white transition-width duration-500 ease-in-out"
+  >
+    <!--content-->
+    <div class="">
+      <div class="p-3 mt-2 text-center space-x-4 md:block">
+        <button
+          class="absolute right-5 top-2.5 mb-2 md:mb-0 bg-red-500 border border-red-500 py-0.5 px-1.5 text-sm shadow-sm font-extrabold tracking-wider text-white rounded-lg hover:shadow-lg hover:bg-red-600"
+          (click)="closeModal()"
+        >
+        &#x00d7;
+        </button>
+      </div>
+      <app-top-card type="TEST" top_type_img="assets/img/musical-note.svg"></app-top-card>
+    </div>
+  </div>
+</div>

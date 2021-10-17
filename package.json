@@ -2,13 +2,15 @@
   "name": "lastspotify",
   "version": "0.0.0",
   "scripts": {
-    "dev": "npm install && ng serve --watch",
+    "init": "npm install",
+    "dev": "ng serve --watch",
     "ng": "ng",
     "start": "ng serve --watch",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "css": "npx windicss './src/**/*.html' './src/**/*.ts' 'src/user.css' -to './src/styles.css' --dev -f './windi.config.ts'"
+    "css": "npx windicss src/**/*.html src/**/*.ts src/user.css -to src/styles.css --dev -f windi.config.ts"
+
   },
   "private": true,
   "dependencies": {

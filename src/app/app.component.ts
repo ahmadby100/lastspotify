@@ -1,6 +1,7 @@
-import { Component, AfterViewInit, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 
 import { DailyPlaysService } from './daily-plays.service'
+import { logger } from './global';
 
 
 @Component({
@@ -9,10 +10,6 @@ import { DailyPlaysService } from './daily-plays.service'
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  private css = "color: orange;";
-  private logapp = (log: any) => {
-		console.log(`%cRoot: ${log}`, this.css);	
-	}
   app_period: string = 'week';
   app_offset = 1;
   header_title = `<span class="text-red-600">last</span>+<span class="text-green-600">spotify</span>.`
@@ -22,13 +19,13 @@ export class AppComponent {
   constructor(private service: DailyPlaysService) {
     this.service.period_change.subscribe(period => {
       this.app_period = period;
-      this.logapp(`Period Update: ${this.app_period}`);
+      logger("Root",`Period Update: ${this.app_period}`, "orange");
     });
     this.service.offset_change.subscribe(offset => {
       this.app_offset = offset;
-      this.logapp(`Offset Update: ${this.app_offset}`);
+      logger("Root",`Offset Update: ${this.app_offset}`, "orange");
     })
   }
-  
+
 
 }

@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { ModalService } from '../modal.service';
 import { Next, TopType } from '../types';
 
 @Component({
@@ -8,7 +9,7 @@ import { Next, TopType } from '../types';
 })
 export class NextCardComponent implements OnInit {
 
-  constructor() { }
+  constructor(private modalService: ModalService) { }
 
   @Input() type: string = "";
   @Input() data: TopType = {
@@ -18,6 +19,10 @@ export class NextCardComponent implements OnInit {
   };
 
   @Input() index: number = 2;
+
+  openModal = () => {
+    this.modalService.updateModalState();
+  }
 
   ngOnInit(): void {
     if (this.type == "artist") {

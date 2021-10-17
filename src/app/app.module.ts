@@ -15,6 +15,7 @@ import { TopCardComponent } from './top-card/top-card.component';
 import { NextCardComponent } from './next-card/next-card.component';
 import { SectionTitleComponent } from './section-title/section-title.component';
 import { HighlightsCardComponent } from './highlights-card/highlights-card.component';
+import { ModalComponent } from './modal/modal.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { HighlightsCardComponent } from './highlights-card/highlights-card.compo
     TopCardComponent,
     NextCardComponent,
     SectionTitleComponent,
-    HighlightsCardComponent
+    HighlightsCardComponent,
+    ModalComponent
   ],
   imports: [
     BrowserModule,

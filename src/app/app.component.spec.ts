@@ -20,16 +20,10 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'lastspotify'`, () => {
+  it(`should have as header_title '<span class="text-red-600">last</span>+<span class="text-green-600">spotify</span>.'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('lastspotify');
+    expect(app.header_title).toEqual('<span class="text-red-600">last</span>+<span class="text-green-600">spotify</span>.');
   });
 
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain('lastspotify app is running!');
-  });
 });
