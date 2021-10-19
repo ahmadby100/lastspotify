@@ -1,7 +1,7 @@
-<!-- <div class="absolute bg-black opacity-80 inset-0 z-0"></div> -->
-<div class="absolute top-1/2 left-1/2" *ngIf="!hidden">
+<div *ngIf="!hidden" class="fixed bg-black opacity-80 inset-0 z-0"></div>
+<div class="fixed top-1/5 left-1/2" *ngIf="!hidden">
   <div
-    class="w-xs hover:w-full h-3/5 p-5 mx-auto my-auto relative -left-1/2 rounded-xl shadow-lg bg-white transition-width duration-500 ease-in-out"
+    class="w-lg h-3/5 p-5 mx-auto my-auto relative -left-1/2 rounded-xl shadow-lg bg-white transition-width duration-500 ease-in-out"
   >
     <!--content-->
     <div class="">
@@ -13,7 +13,14 @@
         &#x00d7;
         </button>
       </div>
-      <app-top-card type="TEST" top_type_img="assets/img/musical-note.svg"></app-top-card>
+      <div class="flex flex-row">
+        <span class="w-7xl mr-15">
+          <app-top-card type="TEST" top_type_img="assets/img/musical-note.svg"></app-top-card>
+        </span>
+
+        <div class="container">Test</div>
+        <!-- <div>Desc</div> -->
+      </div>
     </div>
   </div>
 </div>

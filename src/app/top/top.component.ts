@@ -33,21 +33,52 @@ export class TopComponent implements OnInit {
     album: [],
     artist: []
   }
+  track: TopType = {
+    title: "",
+    artist: "",
+    img: "",
+    plays: 0,
+  }
+  album: TopType = {
+    title: "",
+    artist: "",
+    img: "",
+    plays: 0,
+  }
+  artist: TopType = {
+    artist: "",
+    img: "",
+    plays: 0,
+  }
 
   updateTop = (data: {track: DBResponse, album: DBResponse, artist: DBResponse}): void => {
-    this.top_track = data.track.results[0].track!;
-    this.top_track_artist = data.track.results[0].artist!;
-    this.top_track_plays = data.track.results[0].plays!;
-    this.top_track_img = data.track.results[0].album_image || this.nullartwork;
+    // this.top_track = data.track.results[0].track!;
+    // this.top_track_artist = data.track.results[0].artist!;
+    // this.top_track_plays = data.track.results[0].plays!;
+    // this.top_track_img = data.track.results[0].album_image || this.nullartwork;
 
-    this.top_album = data.album.results[0].album!;
-    this.top_album_artist = data.album.results[0].artist!;
-    this.top_album_plays = data.album.results[0].plays!;
-    this.top_album_img = data.album.results[0].album_image!;
+    this.track.title = data.track.results[0].track;
+    this.track.artist = data.track.results[0].artist;
+    this.track.img = data.track.results[0].album_image || this.nullartwork;
+    this.track.plays = data.track.results[0].plays;
 
-    this.top_artist = data.artist.results[0].artist!;
-    this.top_artist_plays = data.artist.results[0].plays!;
-    this.top_artist_img = data.artist.results[0].artist_image!;
+    // this.top_album = data.album.results[0].album!;
+    // this.top_album_artist = data.album.results[0].artist!;
+    // this.top_album_plays = data.album.results[0].plays!;
+    // this.top_album_img = data.album.results[0].album_image!;
+
+    // this.top_artist = data.artist.results[0].artist!;
+    // this.top_artist_plays = data.artist.results[0].plays!;
+    // this.top_artist_img = data.artist.results[0].artist_image!;
+
+    this.album.title = data.album.results[0].album!;
+    this.album.artist = data.album.results[0].artist!;
+    this.album.plays = data.album.results[0].plays!;
+    this.album.img = data.album.results[0].album_image!;
+
+    this.artist.artist = data.artist.results[0].artist!;
+    this.artist.plays = data.artist.results[0].plays!;
+    this.artist.img = data.artist.results[0].artist_image!;
 
     this.next.artist = []
     this.next.track = []
